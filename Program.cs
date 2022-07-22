@@ -25,7 +25,7 @@ namespace DiscordBot
 
             var config = new ConfigurationBuilder()
                 //.SetBasePath(AppContext.BaseDirectory)
-                .AddYamlFile("C:\\Users\\brett\\Code\\c#\\discordBot\\config.yml")
+                .AddYamlFile("/root/discordbot/config.yml")
                 .Build();
 
             Console.WriteLine(config["testGuild"]);
