@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brett\\Code\\c#\\discordBot\\discordBot.csproj": {}
+    "/home/brett/projects/DiscordBot/discordBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brett\\Code\\c#\\discordBot\\discordBot.csproj": {
+    "/home/brett/projects/DiscordBot/discordBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brett\\Code\\c#\\discordBot\\discordBot.csproj",
+        "projectUniqueName": "/home/brett/projects/DiscordBot/discordBot.csproj",
         "projectName": "discordBot",
-        "projectPath": "C:\\Users\\brett\\Code\\c#\\discordBot\\discordBot.csproj",
-        "packagesPath": "C:\\Users\\brett\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brett\\Code\\c#\\discordBot\\obj\\",
+        "projectPath": "/home/brett/projects/DiscordBot/discordBot.csproj",
+        "packagesPath": "/home/brett/.nuget/packages/",
+        "outputPath": "/home/brett/projects/DiscordBot/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\brett\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/brett/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,58 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "DSharp.FrameWork": {
+              "target": "Package",
+              "version": "[6.7.5.304, )"
+            },
+            "DSharp.NetCore": {
+              "target": "Package",
+              "version": "[6.0.609, )"
+            },
+            "DSharp.NetCore.LogExtension": {
+              "target": "Package",
+              "version": "[6.0.610, )"
+            },
+            "DSharp.NetCore.System": {
+              "target": "Package",
+              "version": "[6.0.609, )"
+            },
+            "DSharp.NetCore.Text": {
+              "target": "Package",
+              "version": "[6.0.609, )"
+            },
+            "DSharpPlus": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.CommandsNext": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.Interactivity": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.Rest": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.SlashCommands": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.VoiceNext": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "DSharpPlus.VoiceNext.Natives": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Discord.Addons.Interactive": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Discord.Net": {
               "target": "Package",
               "version": "[3.6.1, )"
@@ -74,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
         }
       }
     }
