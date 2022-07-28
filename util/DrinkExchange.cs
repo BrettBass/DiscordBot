@@ -8,16 +8,10 @@ public sealed class DrinkExchange {
     
     public string name { get; }
     private static string File { get; } = "/home/brett/projects/DiscordBot/storage/DrinkExchange.json";
-    public static Dictionary<ulong, UserData>? UserData;
+    public static Dictionary<ulong, UserData>? UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(System.IO.File.ReadAllText(File));
 
-    public DrinkExchange()
-    {
-        if(!System.IO.File.Exists(File)) System.IO.File.Create(File);
-        UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(System.IO.File.ReadAllText(File));
-        Debug.Assert(UserData != null, nameof(discordBot.UserData) + " != null");
-    }
 
-    public bool Withdraw(DiscordUser user, double amount)
+    public static bool Withdraw(DiscordUser user, double amount)
     {
         Debug.Assert(UserData != null, nameof(UserData) + " != null");
         if (UserData[user.Id]._chipBalance < amount) return false;
@@ -28,7 +22,7 @@ public sealed class DrinkExchange {
         return true;
     }
 
-    public double Deposit(DiscordUser user, double amount)
+    public static double Deposit(DiscordUser user, double amount)
     {
         if(!checkAccount(user)) AddAccount(user);
         UserData[user.Id].UpdateBalance(amount);
@@ -37,31 +31,31 @@ public sealed class DrinkExchange {
         return amount;
     }
 
-    private bool checkAccount(DiscordUser user){
+    private static bool checkAccount(DiscordUser user){
 
         return(UserData.ContainsKey(user.Id));
     }
 
-    public void AddAccount(DiscordUser user)
+    public static void AddAccount(DiscordUser user)
     {
         Debug.Assert(!checkAccount(user), user.Username + " already found in json file\n ID:" + user.Id);
         UserData.Add(user.Id, new UserData());
         
     }
 
-    public UserData GetUserData(DiscordUser user)
+    public static UserData GetUserData(DiscordUser user)
     {
         return UserData[user.Id];
     }
 
-    public void AddDrink(DiscordUser user, int amount)
+    public static void AddDrink(DiscordUser user, int amount)
     {
         if(!checkAccount(user)) AddAccount(user);
         UserData[user.Id].UpdateTab(amount);
         UpdateJson();
     }
 
-    private void UpdateJson()
+    private static void UpdateJson()
     {
         System.IO.File.WriteAllText(File, JsonConvert.SerializeObject(UserData));
     }

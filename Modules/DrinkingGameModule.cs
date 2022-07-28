@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using Discord;
+using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
@@ -31,6 +33,7 @@ public class DrinkingGameModule : BaseCommandModule
         {
             foreach (var user in users)
             {
+                var contMultiplier = 2;
                 while (pass < 4)
                 {
                     int options;
@@ -46,7 +49,11 @@ public class DrinkingGameModule : BaseCommandModule
                     }
 
                     var guess = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
-                    if (guess.Result.Content.ToLower() == "q") return;
+                    if (guess.Result.Content.ToLower() == "q")
+                    {
+                        await ctx.RespondAsync("Game Over").ConfigureAwait(false);
+                        return;
+                    }
                     
                     int choice = CheckGuess(guess.Result.Content, options);
                     if (choice < 0)
@@ -56,22 +63,41 @@ public class DrinkingGameModule : BaseCommandModule
                     }
 
                     bool result = choice < 2 ? sof.Color(choice) : sof.Value(choice);
-                    await ctx.Channel.SendMessageAsync(embed: sof.Display()).ConfigureAwait(false);
+                    var embed = new DiscordEmbedBuilder()
+                        .WithTitle(result ? "Winner" : "Loser")
+                        .WithColor(new DiscordColor(0, 255, 0));
+                    sof.CardsToEmbed(ref embed);
+                    
+                    await ctx.Channel.SendMessageAsync(embed: embed.Build()).ConfigureAwait(false);
                     if (result)
                     {
                         pass++;
                     }
                     else
                     {
-                        pass--;
+                        var drinksOwed = sof.GetCardsInPlay();
+                        DrinkExchange.AddDrink(user, drinksOwed);
+                        await ctx.RespondAsync(drinksOwed + " Drinks Added to Tab").ConfigureAwait(false);
+                        pass = 0;
                         sof.ClearInPlayCards();
                     }
 
-                    if (pass > 4)
+                    if (pass >= 4)
                     {
                         await ctx.RespondAsync("Would you like to (C)ontinue?").ConfigureAwait(false);
                         var answer = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
-                        if (answer.Result.Content.ToLower() == "c") pass = 3;
+                        if (answer.Result.Content.ToLower() == "c")
+                        {
+                            await ctx.RespondAsync("Continued").ConfigureAwait(false);
+                            contMultiplier <<= 1;
+                            pass = 3;
+                        }
+                        else
+                        {
+                            var chipsRewarded = sof.GetCardsInPlay() * contMultiplier;
+                            DrinkExchange.Deposit(user, chipsRewarded);
+                            await ctx.RespondAsync("rewarded: " + chipsRewarded + " Chips").ConfigureAwait(false);
+                        }
                     }
                     
                 }
@@ -80,7 +106,11 @@ public class DrinkingGameModule : BaseCommandModule
             }
             await ctx.RespondAsync("If anyone wants to (Q)uit:").ConfigureAwait(false);
             var quit = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel).ConfigureAwait(false);
-            if (quit.Result.Content.ToLower() == "q") return;
+            if (quit.Result.Content.ToLower() == "q")
+            {
+                await ctx.RespondAsync("Game Over").ConfigureAwait(false);
+                return;
+            }
         }
     }
 
