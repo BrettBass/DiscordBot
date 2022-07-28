@@ -51,7 +51,8 @@ public class SmokeOrFire
         removedCards.Add(inPlayCards);
         inPlayCards.Flush();
     }
-
+    
+    // TODO create graphical display
     public void CardsToEmbed(ref DiscordEmbedBuilder embed)
     {
         for(int i = 0; i < inPlayCards.Size(); i++)
