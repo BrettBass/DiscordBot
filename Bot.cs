@@ -4,14 +4,8 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Yaml;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
 using DiscordBot.Modules;
-using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
-using Microsoft.Extensions.Logging;
 
 namespace DiscordBot;
 
@@ -25,7 +19,7 @@ public class Bot
         {
             var configBuilder = new ConfigurationBuilder()
                 //.SetBasePath(AppContext.BaseDirectory)
-                .AddYamlFile("/home/brett/projects/DiscordBot/config.yml")
+                .AddYamlFile("/home/brett/projects/DiscordBot/storage/config.yml")
                 .Build();
             var config = new DiscordConfiguration()
             {
@@ -58,6 +52,7 @@ public class Bot
             Commands = Client.UseCommandsNext(commandsConfig);
             Commands.RegisterCommands<PrefixModule>();
             Commands.RegisterCommands<ResponseModule>();
+            Commands.RegisterCommands<DrinkingGameModule>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);

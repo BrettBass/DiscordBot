@@ -10,12 +10,10 @@ namespace DiscordBot.Modules;
 
 public class DrinkingGameModule : BaseCommandModule
 {
-    private enum SofGuess
+    private enum Options
     {
-        Smoke = 0,
-        Fire,
-        Higher,
-        Lower
+        Minimum = 2,
+        Full = 4,
     }
     // "(s)|(s+m+o+k+e+)"
     // "(f)|(f+i+r+e+)"
@@ -28,51 +26,69 @@ public class DrinkingGameModule : BaseCommandModule
     {
         SmokeOrFire sof = new SmokeOrFire();
         var interactivity = ctx.Client.GetInteractivity();
-        
+        var pass = 0;
         while (true)
         {
             foreach (var user in users)
             {
-                var pass = false;
-                while (!pass)
+                while (pass < 4)
                 {
-                    await ctx.RespondAsync("Q to quit/nSmoke or Fire").ConfigureAwait(false);
+                    int options;
+                    if (sof.GetCardsInPlay() == 0)
+                    {
+                        await ctx.RespondAsync("Smoke or Fire").ConfigureAwait(false);
+                        options = (int)Options.Minimum;
+                    }
+                    else
+                    {
+                        await ctx.RespondAsync("Smoke or Fire, Higher or Lower").ConfigureAwait(false);
+                        options = (int)Options.Full;
+                    }
+
                     var guess = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
                     if (guess.Result.Content.ToLower() == "q") return;
-                    if (!Regex.IsMatch(guess.Result.Content, "(s)|(s+m+o+k+e+)|(f)|(f+i+r+e+)"))
+                    
+                    int choice = CheckGuess(guess.Result.Content, options);
+                    if (choice < 0)
                     {
                         await ctx.RespondAsync("invalid guess").ConfigureAwait(false);
                         continue;
                     }
 
-                    if (Sof(ctx, user, sof).Result)
+                    bool result = choice < 2 ? sof.Color(choice) : sof.Value(choice);
+                    await ctx.Channel.SendMessageAsync(embed: sof.Display()).ConfigureAwait(false);
+                    if (result)
                     {
-                        guess = InPlayHand(ctx, user, sof).Result;
+                        pass++;
+                    }
+                    else
+                    {
+                        pass--;
+                        sof.ClearInPlayCards();
+                    }
+
+                    if (pass > 4)
+                    {
+                        await ctx.RespondAsync("Would you like to (C)ontinue?").ConfigureAwait(false);
+                        var answer = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
+                        if (answer.Result.Content.ToLower() == "c") pass = 3;
                     }
                     
-                } 
+                }
+
+                pass = 1;
             }
+            await ctx.RespondAsync("If anyone wants to (Q)uit:").ConfigureAwait(false);
+            var quit = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel).ConfigureAwait(false);
+            if (quit.Result.Content.ToLower() == "q") return;
         }
     }
 
-    private async Task<InteractivityResult<DiscordMessage>> InPlayHand(CommandContext ctx, DiscordUser user, SmokeOrFire sof)
-    {
-        return new InteractivityResult<DiscordMessage>();
-    }    
-    private async Task<bool> Sof(CommandContext ctx, DiscordUser user, SmokeOrFire sof)
-    {
-        return false;
-    }
-    private async Task<bool> Hol(CommandContext ctx, DiscordUser user, SmokeOrFire sof)
-    {
-        return false;
-    }
-
-    private int CheckGuess(string guess)
+    private int CheckGuess(string guess, int options)
     {
         string[] regex = { "(s)|(s+m+o+k+e+)", "(f)|(f+i+r+e+)", "(h)|(h+i+g+h+e+r+)", "(l)|(l+o+w+e+r+)" };
-
-        for (int i = 0; i < regex.Length; i++)
+        
+        for (int i = 0; i < options; i++)
         {
             if (Regex.IsMatch(guess, regex[i], RegexOptions.IgnoreCase))
                 return i;

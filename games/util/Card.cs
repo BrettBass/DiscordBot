@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace DiscordBot.games.util;
 
 public class Card
@@ -51,6 +53,8 @@ public class Card
             return NamedValue + " of  " + Suite.ToString();
         }
     }
+    
+    public int GetSuite() { return (int) Suite; }
 
     public Card(int Value, Suites Suite)
     {

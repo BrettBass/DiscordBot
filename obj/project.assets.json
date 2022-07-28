@@ -11,19 +11,6 @@
           "lib/netstandard2.0/ConcurrentCollections.dll": {}
         }
       },
-      "Discord.Addons.Interactive/2.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Discord.Net.Commands": "2.2.0",
-          "Discord.Net.WebSocket": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
-        }
-      },
       "Discord.Net/3.6.1": {
         "type": "package",
         "dependencies": {
@@ -117,67 +104,6 @@
           "lib/net6.0/Discord.Net.WebSocket.dll": {}
         }
       },
-      "DSharp.FrameWork/6.7.5.304": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "5.0.2",
-          "System.Text.Json": "5.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/DSharp.FrameWork.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DSharp.FrameWork.dll": {}
-        }
-      },
-      "DSharp.NetCore/6.0.609": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/DSharp.NetCore.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/DSharp.NetCore.dll": {}
-        }
-      },
-      "DSharp.NetCore.LogExtension/6.0.610": {
-        "type": "package",
-        "dependencies": {
-          "DSharp.NetCore.Text": "6.0.609",
-          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Serilog.Sinks.Console": "4.0.1",
-          "Serilog.Sinks.File": "5.0.0"
-        },
-        "compile": {
-          "lib/net6.0/DSharp.NetCore.LogExtension.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/DSharp.NetCore.LogExtension.dll": {}
-        }
-      },
-      "DSharp.NetCore.System/6.0.609": {
-        "type": "package",
-        "dependencies": {
-          "DSharp.NetCore": "6.0.609"
-        },
-        "compile": {
-          "lib/net6.0/DSharp.NetCore.System.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/DSharp.NetCore.System.dll": {}
-        }
-      },
-      "DSharp.NetCore.Text/6.0.609": {
-        "type": "package",
-        "dependencies": {
-          "DSharp.NetCore.System": "6.0.609"
-        },
-        "compile": {
-          "lib/net6.0/DSharp.NetCore.Text.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/DSharp.NetCore.Text.dll": {}
-        }
-      },
       "DSharpPlus/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -224,18 +150,6 @@
           "lib/netstandard2.0/DSharpPlus.Interactivity.dll": {}
         }
       },
-      "DSharpPlus.Rest/4.2.0": {
-        "type": "package",
-        "dependencies": {
-          "DSharpPlus": "4.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/DSharpPlus.Rest.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DSharpPlus.Rest.dll": {}
-        }
-      },
       "DSharpPlus.SlashCommands/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -247,41 +161,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/DSharpPlus.SlashCommands.dll": {}
-        }
-      },
-      "DSharpPlus.VoiceNext/4.2.0": {
-        "type": "package",
-        "dependencies": {
-          "DSharpPlus": "4.2.0",
-          "DSharpPlus.VoiceNext.Natives": "1.0.0",
-          "System.Threading.Channels": "5.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/DSharpPlus.VoiceNext.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DSharpPlus.VoiceNext.dll": {}
-        }
-      },
-      "DSharpPlus.VoiceNext.Natives/1.0.0": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/win-x64/native/libopus.dll": {
-            "assetType": "native",
-            "rid": "win-x64"
-          },
-          "runtimes/win-x64/native/libsodium.dll": {
-            "assetType": "native",
-            "rid": "win-x64"
-          },
-          "runtimes/win-x86/native/libopus.dll": {
-            "assetType": "native",
-            "rid": "win-x86"
-          },
-          "runtimes/win-x86/native/libsodium.dll": {
-            "assetType": "native",
-            "rid": "win-x86"
-          }
         }
       },
       "Emzi0767.Common/2.6.2": {
@@ -709,7 +588,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.NETCore.Platforms/5.0.0": {
+      "Microsoft.NETCore.Platforms/1.1.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -736,24 +615,6 @@
         },
         "compile": {
           "ref/netstandard1.3/_._": {}
-        }
-      },
-      "Microsoft.Win32.SystemEvents/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
-        },
-        "compile": {
-          "ref/netstandard2.0/_._": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
         }
       },
       "Newtonsoft.Json/13.0.1": {
@@ -936,39 +797,6 @@
           }
         }
       },
-      "Serilog/2.10.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.1/Serilog.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Serilog.dll": {}
-        }
-      },
-      "Serilog.Sinks.Console/4.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Serilog": "2.10.0"
-        },
-        "compile": {
-          "lib/net5.0/Serilog.Sinks.Console.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/Serilog.Sinks.Console.dll": {}
-        }
-      },
-      "Serilog.Sinks.File/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Serilog": "2.10.0"
-        },
-        "compile": {
-          "lib/net5.0/Serilog.Sinks.File.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/Serilog.Sinks.File.dll": {}
-        }
-      },
       "System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1067,28 +895,6 @@
         },
         "compile": {
           "ref/netstandard1.5/_._": {}
-        }
-      },
-      "System.Drawing.Common/5.0.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.SystemEvents": "5.0.0"
-        },
-        "compile": {
-          "ref/netcoreapp3.0/System.Drawing.Common.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/System.Drawing.Common.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
-          "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
         }
       },
       "System.Globalization/4.3.0": {
@@ -2043,18 +1849,6 @@
         "lib/netstandard2.0/ConcurrentCollections.xml"
       ]
     },
-    "Discord.Addons.Interactive/2.0.0": {
-      "sha512": "j/bkGeDniPuODOOC+3ZpKvLmoG0z1NHSZrVu6bnaUEYd0tMY4TxaIwl36ue7fK9MXrqQc8VcjcDnvM6JX+V6HA==",
-      "type": "package",
-      "path": "discord.addons.interactive/2.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "discord.addons.interactive.2.0.0.nupkg.sha512",
-        "discord.addons.interactive.nuspec",
-        "lib/netstandard2.0/Discord.Addons.Interactive.dll"
-      ]
-    },
     "Discord.Net/3.6.1": {
       "sha512": "TfcL/HG57fVt//WVJ2XyF2PlytY9IYkkwwkPLIhvu5FW4wf9rm7+N8RPh4qtELLfsa5ES0FK2RbgYjABRR9AjA==",
       "type": "package",
@@ -2190,71 +1984,6 @@
         "lib/netstandard2.1/Discord.Net.WebSocket.xml"
       ]
     },
-    "DSharp.FrameWork/6.7.5.304": {
-      "sha512": "s4r8/Rt30Ea3aTzQPCA2a9feD7wcfry0X2o1XiY/YYnhkM06/TkiZu2MoREJY7r+AkDy2w89B7hU817gGzD4Lg==",
-      "type": "package",
-      "path": "dsharp.framework/6.7.5.304",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "IconNet.png",
-        "dsharp.framework.6.7.5.304.nupkg.sha512",
-        "dsharp.framework.nuspec",
-        "lib/netstandard2.0/DSharp.FrameWork.dll"
-      ]
-    },
-    "DSharp.NetCore/6.0.609": {
-      "sha512": "n0hLdsf/v2zPwZn9xXyPP6SsJpUBuxzwmkMqA38EBm1zoOBOeBKTUSaBbmJ0yLxMcL/Em9oSCmZid+XiYIgjGQ==",
-      "type": "package",
-      "path": "dsharp.netcore/6.0.609",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "IconNetCore.png",
-        "dsharp.netcore.6.0.609.nupkg.sha512",
-        "dsharp.netcore.nuspec",
-        "lib/net6.0/DSharp.NetCore.dll"
-      ]
-    },
-    "DSharp.NetCore.LogExtension/6.0.610": {
-      "sha512": "UyBqZ7eQBDqwXbQnt+uj3igQ+gVUDkP6ZZ5lEoDkRpdn6dgzBUhVxW5ofg3X3aFUybOEKZCmv5WdYQpL1lBnqQ==",
-      "type": "package",
-      "path": "dsharp.netcore.logextension/6.0.610",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "IconNetCore.png",
-        "dsharp.netcore.logextension.6.0.610.nupkg.sha512",
-        "dsharp.netcore.logextension.nuspec",
-        "lib/net6.0/DSharp.NetCore.LogExtension.dll"
-      ]
-    },
-    "DSharp.NetCore.System/6.0.609": {
-      "sha512": "eHTv+LAPmG01hBHhqp5+PJTAVQX8lWv9sN3K80V1Agqi0nnUpFaoi/+c8YaeOo8nSWdQWkIW/GdYMNSMYPtD+g==",
-      "type": "package",
-      "path": "dsharp.netcore.system/6.0.609",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "IconNetCore.png",
-        "dsharp.netcore.system.6.0.609.nupkg.sha512",
-        "dsharp.netcore.system.nuspec",
-        "lib/net6.0/DSharp.NetCore.System.dll"
-      ]
-    },
-    "DSharp.NetCore.Text/6.0.609": {
-      "sha512": "QrYyevwdMnoNd7v/n04EykiFzgf9WTkAz6J0863bACK4LDdrNiISU/cPBYzc87eGUkqYBcXaKeG/BwQdVwyRWg==",
-      "type": "package",
-      "path": "dsharp.netcore.text/6.0.609",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "IconNetCore.png",
-        "dsharp.netcore.text.6.0.609.nupkg.sha512",
-        "dsharp.netcore.text.nuspec",
-        "lib/net6.0/DSharp.NetCore.Text.dll"
-      ]
-    },
     "DSharpPlus/4.2.0": {
       "sha512": "sdQQS6ud6UAA7qUXOi5pyt1NMkBuAJ8SdssNJykE+sUXpDfD23Ja1AgUo+QktkTv1/jvQfcyET7HqgpBFdmjmw==",
       "type": "package",
@@ -2297,20 +2026,6 @@
         "lib/netstandard2.0/DSharpPlus.Interactivity.xml"
       ]
     },
-    "DSharpPlus.Rest/4.2.0": {
-      "sha512": "6YYu7C+oM9qD4U30WXiZ2DvnFV0hDlmdQtIvc/jBkEyyBuzaWQxqbNH2hHnFOAu/Ag8YhN2HuZ68elPJx6Ovmg==",
-      "type": "package",
-      "path": "dsharpplus.rest/4.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dsharpplus.png",
-        "dsharpplus.rest.4.2.0.nupkg.sha512",
-        "dsharpplus.rest.nuspec",
-        "lib/netstandard2.0/DSharpPlus.Rest.dll",
-        "lib/netstandard2.0/DSharpPlus.Rest.xml"
-      ]
-    },
     "DSharpPlus.SlashCommands/4.2.0": {
       "sha512": "u9eUYmrvriCHu+pRIJPq9/6fJHB+SkbN3YXkjhpKpS+ddDF/8BQQ5H4zuTIA/gWr3H41RFVa2Nuz7rbaRKqI5w==",
       "type": "package",
@@ -2323,35 +2038,6 @@
         "dsharpplus.slashcommands.nuspec",
         "lib/netstandard2.0/DSharpPlus.SlashCommands.dll",
         "lib/netstandard2.0/DSharpPlus.SlashCommands.xml"
-      ]
-    },
-    "DSharpPlus.VoiceNext/4.2.0": {
-      "sha512": "nTc+u++d4+qU8kxYfjPZj+05oVDeqzrtYTGiH8qY1ssQPTi1M2yNPzK8+H1yxKKvcCnvlboxTN5Z8etc6ycLaQ==",
-      "type": "package",
-      "path": "dsharpplus.voicenext/4.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dsharpplus.png",
-        "dsharpplus.voicenext.4.2.0.nupkg.sha512",
-        "dsharpplus.voicenext.nuspec",
-        "lib/netstandard2.0/DSharpPlus.VoiceNext.dll",
-        "lib/netstandard2.0/DSharpPlus.VoiceNext.xml"
-      ]
-    },
-    "DSharpPlus.VoiceNext.Natives/1.0.0": {
-      "sha512": "U+UtMpommsfh+OOgLYQBy1e+53P/q6/LW18bgIJqsyshhThhiyEH8ISnpESdQrcqEDj6Nud7+FbnNi7N4QtDGw==",
-      "type": "package",
-      "path": "dsharpplus.voicenext.natives/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dsharpplus.voicenext.natives.1.0.0.nupkg.sha512",
-        "dsharpplus.voicenext.natives.nuspec",
-        "runtimes/win-x64/native/libopus.dll",
-        "runtimes/win-x64/native/libsodium.dll",
-        "runtimes/win-x86/native/libopus.dll",
-        "runtimes/win-x86/native/libsodium.dll"
       ]
     },
     "Emzi0767.Common/2.6.2": {
@@ -2950,22 +2636,19 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NETCore.Platforms/5.0.0": {
-      "sha512": "VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+    "Microsoft.NETCore.Platforms/1.1.1": {
+      "sha512": "TMBuzAHpTenGbGgk0SMTwyEkyijY/Eae4ZGsFNYJvAr/LDn1ku3Etp3FPxChmDp5HHF3kzJuoaa08N0xjqAJfQ==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/5.0.0",
+      "path": "microsoft.netcore.platforms/1.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+        "microsoft.netcore.platforms.1.1.1.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
     "Microsoft.NETCore.Targets/1.1.0": {
@@ -3019,34 +2702,6 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
-      ]
-    },
-    "Microsoft.Win32.SystemEvents/5.0.0": {
-      "sha512": "Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
-      "type": "package",
-      "path": "microsoft.win32.systemevents/5.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.Win32.SystemEvents.dll",
-        "lib/net461/Microsoft.Win32.SystemEvents.xml",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-        "microsoft.win32.systemevents.nuspec",
-        "ref/net461/Microsoft.Win32.SystemEvents.dll",
-        "ref/net461/Microsoft.Win32.SystemEvents.xml",
-        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "Newtonsoft.Json/13.0.1": {
@@ -3298,77 +2953,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "Serilog/2.10.0": {
-      "sha512": "+QX0hmf37a0/OZLxM3wL7V6/ADvC1XihXN4Kq/p6d8lCPfgkRdiuhbWlMaFjR9Av0dy5F0+MBeDmDdRZN/YwQA==",
-      "type": "package",
-      "path": "serilog/2.10.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icon.png",
-        "lib/net45/Serilog.dll",
-        "lib/net45/Serilog.xml",
-        "lib/net46/Serilog.dll",
-        "lib/net46/Serilog.xml",
-        "lib/netstandard1.0/Serilog.dll",
-        "lib/netstandard1.0/Serilog.xml",
-        "lib/netstandard1.3/Serilog.dll",
-        "lib/netstandard1.3/Serilog.xml",
-        "lib/netstandard2.0/Serilog.dll",
-        "lib/netstandard2.0/Serilog.xml",
-        "lib/netstandard2.1/Serilog.dll",
-        "lib/netstandard2.1/Serilog.xml",
-        "serilog.2.10.0.nupkg.sha512",
-        "serilog.nuspec"
-      ]
-    },
-    "Serilog.Sinks.Console/4.0.1": {
-      "sha512": "apLOvSJQLlIbKlbx+Y2UDHSP05kJsV7mou+fvJoRGs/iR+jC22r8cuFVMjjfVxz/AD4B2UCltFhE1naRLXwKNw==",
-      "type": "package",
-      "path": "serilog.sinks.console/4.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icon.png",
-        "lib/net45/Serilog.Sinks.Console.dll",
-        "lib/net45/Serilog.Sinks.Console.xml",
-        "lib/net5.0/Serilog.Sinks.Console.dll",
-        "lib/net5.0/Serilog.Sinks.Console.xml",
-        "lib/netstandard1.3/Serilog.Sinks.Console.dll",
-        "lib/netstandard1.3/Serilog.Sinks.Console.xml",
-        "lib/netstandard2.0/Serilog.Sinks.Console.dll",
-        "lib/netstandard2.0/Serilog.Sinks.Console.xml",
-        "serilog.sinks.console.4.0.1.nupkg.sha512",
-        "serilog.sinks.console.nuspec"
-      ]
-    },
-    "Serilog.Sinks.File/5.0.0": {
-      "sha512": "uwV5hdhWPwUH1szhO8PJpFiahqXmzPzJT/sOijH/kFgUx+cyoDTMM8MHD0adw9+Iem6itoibbUXHYslzXsLEAg==",
-      "type": "package",
-      "path": "serilog.sinks.file/5.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "images/icon.png",
-        "lib/net45/Serilog.Sinks.File.dll",
-        "lib/net45/Serilog.Sinks.File.pdb",
-        "lib/net45/Serilog.Sinks.File.xml",
-        "lib/net5.0/Serilog.Sinks.File.dll",
-        "lib/net5.0/Serilog.Sinks.File.pdb",
-        "lib/net5.0/Serilog.Sinks.File.xml",
-        "lib/netstandard1.3/Serilog.Sinks.File.dll",
-        "lib/netstandard1.3/Serilog.Sinks.File.pdb",
-        "lib/netstandard1.3/Serilog.Sinks.File.xml",
-        "lib/netstandard2.0/Serilog.Sinks.File.dll",
-        "lib/netstandard2.0/Serilog.Sinks.File.pdb",
-        "lib/netstandard2.0/Serilog.Sinks.File.xml",
-        "lib/netstandard2.1/Serilog.Sinks.File.dll",
-        "lib/netstandard2.1/Serilog.Sinks.File.pdb",
-        "lib/netstandard2.1/Serilog.Sinks.File.xml",
-        "serilog.sinks.file.5.0.0.nupkg.sha512",
-        "serilog.sinks.file.nuspec"
       ]
     },
     "System.Collections/4.3.0": {
@@ -3745,48 +3329,6 @@
         "ref/xamarinwatchos10/_._",
         "system.diagnostics.tracing.4.3.0.nupkg.sha512",
         "system.diagnostics.tracing.nuspec"
-      ]
-    },
-    "System.Drawing.Common/5.0.2": {
-      "sha512": "rvr/M1WPf24ljpvvrVd74+NdjRUJu1bBkspkZcnzSZnmAUQWSvanlQ0k/hVHk+cHufZbZfu7vOh/vYc0q5Uu/A==",
-      "type": "package",
-      "path": "system.drawing.common/5.0.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net461/System.Drawing.Common.dll",
-        "lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "lib/netstandard2.0/System.Drawing.Common.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net461/System.Drawing.Common.dll",
-        "ref/netcoreapp3.0/System.Drawing.Common.dll",
-        "ref/netcoreapp3.0/System.Drawing.Common.xml",
-        "ref/netstandard2.0/System.Drawing.Common.dll",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll",
-        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
-        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "system.drawing.common.5.0.2.nupkg.sha512",
-        "system.drawing.common.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Globalization/4.3.0": {
@@ -6201,19 +5743,9 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DSharp.FrameWork >= 6.7.5.304",
-      "DSharp.NetCore >= 6.0.609",
-      "DSharp.NetCore.LogExtension >= 6.0.610",
-      "DSharp.NetCore.System >= 6.0.609",
-      "DSharp.NetCore.Text >= 6.0.609",
-      "DSharpPlus >= 4.2.0",
       "DSharpPlus.CommandsNext >= 4.2.0",
       "DSharpPlus.Interactivity >= 4.2.0",
-      "DSharpPlus.Rest >= 4.2.0",
       "DSharpPlus.SlashCommands >= 4.2.0",
-      "DSharpPlus.VoiceNext >= 4.2.0",
-      "DSharpPlus.VoiceNext.Natives >= 1.0.0",
-      "Discord.Addons.Interactive >= 2.0.0",
       "Discord.Net >= 3.6.1",
       "Microsoft.Extensions.Configuration >= 6.0.1",
       "Microsoft.Extensions.Configuration.Yaml >= 2.0.0-preview2",
@@ -6258,30 +5790,6 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "DSharp.FrameWork": {
-            "target": "Package",
-            "version": "[6.7.5.304, )"
-          },
-          "DSharp.NetCore": {
-            "target": "Package",
-            "version": "[6.0.609, )"
-          },
-          "DSharp.NetCore.LogExtension": {
-            "target": "Package",
-            "version": "[6.0.610, )"
-          },
-          "DSharp.NetCore.System": {
-            "target": "Package",
-            "version": "[6.0.609, )"
-          },
-          "DSharp.NetCore.Text": {
-            "target": "Package",
-            "version": "[6.0.609, )"
-          },
-          "DSharpPlus": {
-            "target": "Package",
-            "version": "[4.2.0, )"
-          },
           "DSharpPlus.CommandsNext": {
             "target": "Package",
             "version": "[4.2.0, )"
@@ -6290,25 +5798,9 @@
             "target": "Package",
             "version": "[4.2.0, )"
           },
-          "DSharpPlus.Rest": {
-            "target": "Package",
-            "version": "[4.2.0, )"
-          },
           "DSharpPlus.SlashCommands": {
             "target": "Package",
             "version": "[4.2.0, )"
-          },
-          "DSharpPlus.VoiceNext": {
-            "target": "Package",
-            "version": "[4.2.0, )"
-          },
-          "DSharpPlus.VoiceNext.Natives": {
-            "target": "Package",
-            "version": "[1.0.0, )"
-          },
-          "Discord.Addons.Interactive": {
-            "target": "Package",
-            "version": "[2.0.0, )"
           },
           "Discord.Net": {
             "target": "Package",
