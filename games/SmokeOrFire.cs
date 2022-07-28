@@ -1,4 +1,3 @@
-using Discord;
 using DiscordBot.games.util;
 using DSharpPlus.Entities;
 
@@ -53,14 +52,10 @@ public class SmokeOrFire
         inPlayCards.Flush();
     }
 
-    public DiscordEmbed Display()
+    public void CardsToEmbed(ref DiscordEmbedBuilder embed)
     {
-        var embed = new DiscordEmbedBuilder()
-            .WithTitle("Cards");
         for(int i = 0; i < inPlayCards.Size(); i++)
-        {
-            embed.AddField("Card " + i+1 + ":", inPlayCards.Get(i).Name);
-        }
-        return embed.Build();
+            embed.AddField("Card " + (i+1) + ":", inPlayCards.Get(i).Name);
+        
     }
 }
