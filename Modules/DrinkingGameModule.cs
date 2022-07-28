@@ -17,15 +17,12 @@ public class DrinkingGameModule : BaseCommandModule
         Minimum = 2,
         Full = 4,
     }
-    // "(s)|(s+m+o+k+e+)"
-    // "(f)|(f+i+r+e+)"
-    // "(h)|(h+i+g+h+e+r+)"
-    // "(l)|(l+o+w+e+r+)"
-    
-    
+
+
     [Command("smokeorfire"), Aliases("sof")]
     public async Task SmokeOrFire(CommandContext ctx, params DiscordUser[] users)
     {
+        users.Append(ctx.User);
         SmokeOrFire sof = new SmokeOrFire();
         var interactivity = ctx.Client.GetInteractivity();
         var pass = 0;
