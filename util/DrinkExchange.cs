@@ -2,7 +2,7 @@ using System.Diagnostics;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
 
-namespace discordBot;
+namespace discordBot.util;
 
 public sealed class DrinkExchange {
     
@@ -14,7 +14,7 @@ public sealed class DrinkExchange {
     {
         if(!System.IO.File.Exists(File)) System.IO.File.Create(File);
         UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(System.IO.File.ReadAllText(File));
-        Debug.Assert(UserData != null, nameof(discordBot.UserData) + " != null");
+        Debug.Assert(UserData != null, nameof(util.UserData) + " != null");
     }
 
     public bool Withdraw(DiscordUser user, double amount)
