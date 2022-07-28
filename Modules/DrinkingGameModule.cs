@@ -59,7 +59,7 @@ public class DrinkingGameModule : BaseCommandModule
 
                     bool result = choice < 2 ? sof.Color(choice) : sof.Value(choice);
                     var embed = new DiscordEmbedBuilder()
-                        .WithTitle(result ? "Winner" : "Loser")
+                        .WithTitle(result ? "Correct" : "Loser")
                         .WithColor(new DiscordColor(0, 255, 0));
                     sof.CardsToEmbed(ref embed);
                     
