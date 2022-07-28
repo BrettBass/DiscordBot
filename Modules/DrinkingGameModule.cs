@@ -64,11 +64,9 @@ public class DrinkingGameModule : BaseCommandModule
                     sof.CardsToEmbed(ref embed);
                     
                     await ctx.Channel.SendMessageAsync(embed: embed.Build()).ConfigureAwait(false);
-                    if (result)
-                    {
-                        pass++;
-                    }
-                    else
+                    pass++;
+                    
+                    if (!result)
                     {
                         var drinksOwed = sof.GetCardsInPlay();
                         DrinkExchange.AddDrink(user, drinksOwed);
