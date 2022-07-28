@@ -1,11 +1,9 @@
 using System.Text.RegularExpressions;
-using Discord;
 using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DiscordBot.games;
-using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules;
