@@ -35,7 +35,12 @@ public class CustomHelpFormatter : DefaultHelpFormatter
 
         return this;
     }
+    //TODO Sort commands by Module
+    public IEnumerable<Command> Sort(IEnumerable<Command> cmds)
+    {
 
+        return cmds;
+    }
     public override CommandHelpMessage Build()
     {
         return new CommandHelpMessage(embed: _embed);
