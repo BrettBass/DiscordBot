@@ -34,12 +34,12 @@ public class DrinkingGameModule : BaseCommandModule
                     int options;
                     if (sof.GetCardsInPlay() == 0)
                     {
-                        await ctx.RespondAsync("Smoke or Fire").ConfigureAwait(false);
+                        await ctx.RespondAsync(user.Username + ": Smoke or Fire").ConfigureAwait(false);
                         options = (int)Options.Minimum;
                     }
                     else
                     {
-                        await ctx.RespondAsync("Smoke or Fire, Higher or Lower").ConfigureAwait(false);
+                        await ctx.RespondAsync(user.Username + ": Smoke or Fire, Higher or Lower").ConfigureAwait(false);
                         options = (int)Options.Full;
                     }
 
@@ -109,7 +109,7 @@ public class DrinkingGameModule : BaseCommandModule
 
     private int CheckGuess(string guess, int options)
     {
-        string[] regex = { "(s)|(s+m+o+k+e+)", "(f)|(f+i+r+e+)", "(h)|(h+i+g+h+e+r+)", "(l)|(l+o+w+e+r+)" };
+        string[] regex = { "^((s)|(s+m+o+k+e+))", "^((f)|(f+i+r+e+))", "^((h)|(h+i+g+h+e+r+))", "^((l)|(l+o+w+e+r+))" };
         
         for (int i = 0; i < options; i++)
         {
