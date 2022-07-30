@@ -98,7 +98,7 @@ public class DrinkingGameModule : BaseCommandModule
                 pass = 1;
             }
             await ctx.RespondAsync("If anyone wants to (Q)uit:").ConfigureAwait(false);
-            var quit = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel).ConfigureAwait(false);
+            var quit = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel && users.Contains(x.Author)).ConfigureAwait(false);
             if (quit.Result.Content.ToLower() == "q")
             {
                 await ctx.RespondAsync("Game Over").ConfigureAwait(false);
