@@ -2,7 +2,7 @@ using System.Diagnostics;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
 
-namespace discordBot;
+namespace discordBot.util;
 
 public sealed class DrinkExchange {
     

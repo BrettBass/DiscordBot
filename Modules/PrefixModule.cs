@@ -4,6 +4,8 @@ using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DiscordBot.games;
+using discordBot.util;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
