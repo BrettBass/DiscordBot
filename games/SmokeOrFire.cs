@@ -1,5 +1,5 @@
-using Discord;
 using DiscordBot.games.util;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 
 namespace DiscordBot.games;
@@ -52,15 +52,10 @@ public class SmokeOrFire
         removedCards.Add(inPlayCards);
         inPlayCards.Flush();
     }
-
-    public DiscordEmbed Display()
+    
+    public void CardsToEmojis(CommandContext ctx, ref DiscordMessageBuilder msg)
     {
-        var embed = new DiscordEmbedBuilder()
-            .WithTitle("Cards");
-        for(int i = 0; i < inPlayCards.Size(); i++)
-        {
-            embed.AddField("Card " + i+1 + ":", inPlayCards.Get(i).Name);
-        }
-        return embed.Build();
+        for (int i = 0; i < inPlayCards.Size(); i++)
+            msg.Content += inPlayCards.Get(i).GetEmoji(ctx); 
     }
 }

@@ -13,8 +13,6 @@ namespace DiscordBot.Modules
 {
     public class PrefixModule : BaseCommandModule
     {
-        DrinkExchange bank = new DrinkExchange();
-
         [Command("ping")]
         public async Task Ping(CommandContext ctx)
         {
@@ -34,10 +32,10 @@ namespace DiscordBot.Modules
         {
             //get the id of user who sent the command
             var user = ctx.User;
-            var userdata = bank.GetUserData(user);
+            var userdata = DrinkExchange.GetUserData(user);
 
             var embed = new DiscordEmbedBuilder()
-                .WithTitle("Account Statement")
+                .WithTitle(DrinkExchange.Name)
                 .WithColor(new DiscordColor(0, 255, 0))
                 .WithThumbnail("https://melmagazine.com/wp-content/uploads/2022/04/Drunken_Monkey_Hypothesis-1024x427.jpg")
                 .AddField("User", user.Username)
@@ -51,7 +49,7 @@ namespace DiscordBot.Modules
         [Command("deposit")]
         public async Task Deposit(CommandContext ctx, double amount)
         {
-            bank.Deposit(ctx.User, amount);
+            DrinkExchange.Deposit(ctx.User, amount);
             await ctx.Channel.SendMessageAsync("Deposited " + amount).ConfigureAwait(false);
         }
         
@@ -60,7 +58,7 @@ namespace DiscordBot.Modules
         
         public async Task Withdraw(CommandContext ctx, double amount)
         {
-            if (bank.Withdraw(ctx.User, amount))
+            if (DrinkExchange.Withdraw(ctx.User, amount))
                 await ctx.Channel.SendMessageAsync("Withdrew " + amount ).ConfigureAwait(false);
             else 
                 await ctx.Channel.SendMessageAsync("Invalid amount").ConfigureAwait(false);
@@ -69,7 +67,7 @@ namespace DiscordBot.Modules
         [Command("addDrink"), Description("addDrink <user> <amount>"), Aliases("ad")]
         public async Task AddDrink(CommandContext ctx, DiscordUser user, int amount)
         {
-            bank.AddDrink(user, amount);
+            DrinkExchange.AddDrink(user, amount);
             await ctx.Channel.SendMessageAsync("Added " + amount + " drinks to " + user.Username).ConfigureAwait(false);
         }
         
@@ -93,10 +91,10 @@ namespace DiscordBot.Modules
             var msg = result + "\n";
             if (result != guess.ToLower()) {
                 msg += "drink " + bet + " bitch";
-                AddDrink(ctx, ctx.User, bet);
+                await AddDrink(ctx, ctx.User, bet);
             } else {
                 msg += "clean";
-                bank.Deposit(ctx.User, bet * 10);
+                DrinkExchange.Deposit(ctx.User, bet * 10);
             }
             msg += result + result == guess.ToLower() ? "drink " + bet + " bitch" : "";
             
@@ -104,9 +102,9 @@ namespace DiscordBot.Modules
         }
 
         [Command("coinflip")]
-        public async Task CoinFlip(CommandContext ctx, int bet = 1, params DiscordUser[] users)
+        public async Task CoinFlip(CommandContext ctx, int bet = 1, params DiscordUser[] addedUsers)
         {
-            users.Append(ctx.User);
+            var users = new[] {ctx.User}.Concat(addedUsers);
             (var result, var resultPattern) = games.BasicDrinking.CoinFlip() ? ("heads", "(h+e+a+d+)s*") : ("tails","(t+a+i+l+)s*");
 
             var losers = "";
