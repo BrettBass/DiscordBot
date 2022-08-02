@@ -89,7 +89,7 @@ namespace DiscordBot.Modules
             var msg = result + "\n";
             if (result != guess.ToLower()) {
                 msg += "drink " + bet + " bitch";
-                AddDrink(ctx, ctx.User, bet);
+                await AddDrink(ctx, ctx.User, bet);
             } else {
                 msg += "clean";
                 DrinkExchange.Deposit(ctx.User, bet * 10);

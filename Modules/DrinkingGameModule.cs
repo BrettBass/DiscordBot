@@ -55,7 +55,7 @@ public class DrinkingGameModule : BaseCommandModule
                     await ctx.Channel.SendMessageAsync(msg);
 
                     pass++;
-                    // TODO find good msg embedded format, and speed up outputs
+                    
                     if (!result)
                     {
                         var drinksOwed = sof.GetCardsInPlay();

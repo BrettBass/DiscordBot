@@ -5,6 +5,7 @@ using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Yaml;
 using DiscordBot.Modules;
+using DSharpPlus.CommandsNext.Executors;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot;
@@ -50,6 +51,7 @@ public class Bot
             EnableMentionPrefix = true,
             DmHelp = true,
             IgnoreExtraArguments = true,
+            CommandExecutor = new ParallelQueuedCommandExecutor()
             
         };
         Commands = Client.UseCommandsNext(commandsConfig);
