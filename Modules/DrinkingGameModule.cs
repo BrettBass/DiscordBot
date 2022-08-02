@@ -5,7 +5,6 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DiscordBot.games;
-using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules;
@@ -20,9 +19,9 @@ public class DrinkingGameModule : BaseCommandModule
 
 
     [Command("smokeorfire"), Aliases("sof")]
-    public async Task SmokeOrFire(CommandContext ctx, params DiscordUser[] users)
+    public async Task SmokeOrFire(CommandContext ctx, params DiscordUser[] addedUsers)
     {
-        users.Append(ctx.User);
+        var users = new[] {ctx.User}.Concat(addedUsers);
         var interactivity = ctx.Client.GetInteractivity();
         SmokeOrFire sof = new SmokeOrFire();
         var pass = 0;

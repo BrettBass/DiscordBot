@@ -100,9 +100,9 @@ namespace DiscordBot.Modules
         }
 
         [Command("coinflip")]
-        public async Task CoinFlip(CommandContext ctx, int bet = 1, params DiscordUser[] users)
+        public async Task CoinFlip(CommandContext ctx, int bet = 1, params DiscordUser[] addedUsers)
         {
-            users.Append(ctx.User);
+            var users = new[] {ctx.User}.Concat(addedUsers);
             (var result, var resultPattern) = games.BasicDrinking.CoinFlip() ? ("heads", "(h+e+a+d+)s*") : ("tails","(t+a+i+l+)s*");
 
             var losers = "";
