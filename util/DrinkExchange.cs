@@ -6,8 +6,8 @@ namespace discordBot;
 
 public sealed class DrinkExchange {
     
-    public string name { get; }
-    private static string File { get; } = "/home/brett/projects/DiscordBot/storage/DrinkExchange.json";
+    public static string Name = "Drink Exchange";
+    private static string File = "/home/brett/projects/DiscordBot/storage/DrinkExchange.json";
     public static Dictionary<ulong, UserData>? UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(System.IO.File.ReadAllText(File));
 
 

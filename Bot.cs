@@ -44,16 +44,16 @@ public class Bot
         //     
         // });
 
-            var commandsConfig = new CommandsNextConfiguration()
-        {
-            StringPrefixes = new String[] { configBuilder["prefix"] },
-            EnableDms = true,
-            EnableMentionPrefix = true,
-            DmHelp = true,
-            IgnoreExtraArguments = true,
-            CommandExecutor = new ParallelQueuedCommandExecutor()
-            
-        };
+        var commandsConfig = new CommandsNextConfiguration()
+            {
+                StringPrefixes = new String[] { configBuilder["prefix"] },
+                EnableDms = true,
+                EnableMentionPrefix = true,
+                DmHelp = true,
+                IgnoreExtraArguments = true,
+                CommandExecutor = new ParallelQueuedCommandExecutor()
+                
+            };
         Commands = Client.UseCommandsNext(commandsConfig);
         Commands.RegisterCommands<PrefixModule>();
         Commands.RegisterCommands<ResponseModule>();

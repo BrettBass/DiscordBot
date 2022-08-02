@@ -33,7 +33,7 @@ namespace DiscordBot.Modules
             var userdata = DrinkExchange.GetUserData(user);
 
             var embed = new DiscordEmbedBuilder()
-                .WithTitle("Account Statement")
+                .WithTitle(DrinkExchange.Name)
                 .WithColor(new DiscordColor(0, 255, 0))
                 .WithThumbnail("https://melmagazine.com/wp-content/uploads/2022/04/Drunken_Monkey_Hypothesis-1024x427.jpg")
                 .AddField("User", user.Username)
