@@ -55,6 +55,12 @@ public sealed class DrinkExchange {
         UpdateJson();
     }
 
+    public static double Tab(DiscordUser user)
+    {
+        if(!checkAccount(user)) AddAccount(user);
+        return UserData[user.Id]._barTab;
+    }
+
     private static void UpdateJson()
     {
         System.IO.File.WriteAllText(File, JsonConvert.SerializeObject(UserData));

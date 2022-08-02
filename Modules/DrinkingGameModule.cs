@@ -1,9 +1,11 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DiscordBot.games;
+using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules;
@@ -21,8 +23,8 @@ public class DrinkingGameModule : BaseCommandModule
     public async Task SmokeOrFire(CommandContext ctx, params DiscordUser[] users)
     {
         users.Append(ctx.User);
-        SmokeOrFire sof = new SmokeOrFire();
         var interactivity = ctx.Client.GetInteractivity();
+        SmokeOrFire sof = new SmokeOrFire();
         var pass = 0;
         while (true)
         {
@@ -31,26 +33,16 @@ public class DrinkingGameModule : BaseCommandModule
                 var contMultiplier = 2;
                 while (pass < 4)
                 {
-                    int options;
-                    if (sof.GetCardsInPlay() == 0)
-                    {
-                        await ctx.RespondAsync(user.Username + ": Smoke or Fire").ConfigureAwait(false);
-                        options = (int)Options.Minimum;
-                    }
-                    else
-                    {
-                        await ctx.RespondAsync(user.Username + ": Smoke or Fire, Higher or Lower").ConfigureAwait(false);
-                        options = (int)Options.Full;
-                    }
+                    Options options = sof.GetCardsInPlay() == 0 ? Options.Minimum : Options.Full;
+                    var guess = PromptGuess(ctx, user, options).Result;
 
-                    var guess = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
-                    if (guess.Result.Content.ToLower() == "q")
+                    if (guess.ToLower() == "q")
                     {
                         await ctx.RespondAsync("Game Over").ConfigureAwait(false);
                         return;
                     }
                     
-                    int choice = CheckGuess(guess.Result.Content, options);
+                    int choice = CheckGuess(guess, (int)options);
                     if (choice < 0)
                     {
                         await ctx.RespondAsync("invalid guess").ConfigureAwait(false);
@@ -58,39 +50,52 @@ public class DrinkingGameModule : BaseCommandModule
                     }
 
                     bool result = choice < 2 ? sof.Color(choice) : sof.Value(choice);
-                    var embed = new DiscordEmbedBuilder()
-                        .WithTitle(result ? "Correct" : "Loser")
-                        .WithColor(new DiscordColor(0, 255, 0));
-                    sof.CardsToEmbed(ref embed);
-                    
-                    await ctx.Channel.SendMessageAsync(embed: embed.Build()).ConfigureAwait(false);
+
+                    var msg = new DiscordMessageBuilder();
+                    sof.CardsToEmojis(ctx, ref msg);
+                    await ctx.Channel.SendMessageAsync(msg);
+
                     pass++;
-                    
+                    // TODO find good msg embedded format, and speed up outputs
                     if (!result)
                     {
                         var drinksOwed = sof.GetCardsInPlay();
                         DrinkExchange.AddDrink(user, drinksOwed);
-                        await ctx.RespondAsync(drinksOwed + " Drinks Added to Tab").ConfigureAwait(false);
+                        var embed = new DiscordEmbedBuilder()
+                            .WithTitle("Loser")
+                            .WithColor(new DiscordColor(0, 255, 0))
+                            .WithThumbnail("https://pm1.narvii.com/6450/2f24804e66bd3d4449a2619f2d422ade180ce78c_hq.jpg")
+                            .AddField("User", user.Username)
+                            .AddField("Tab", DrinkExchange.Tab(user).ToString(CultureInfo.InvariantCulture));
+                        
+                        await ctx.Channel.SendMessageAsync(embed: embed.Build()).ConfigureAwait(false);
+                        
                         pass = 0;
                         sof.ClearInPlayCards();
                     }
 
                     if (pass >= 4)
                     {
-                        await ctx.RespondAsync("Would you like to (C)ontinue?").ConfigureAwait(false);
-                        var answer = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
-                        if (answer.Result.Content.ToLower() == "c")
-                        {
-                            await ctx.RespondAsync("Continued").ConfigureAwait(false);
-                            contMultiplier <<= 1;
-                            pass = 3;
-                        }
-                        else
+                        if (Pass(ctx, user).Result)
                         {
                             var chipsRewarded = sof.GetCardsInPlay() * contMultiplier;
                             DrinkExchange.Deposit(user, chipsRewarded);
-                            await ctx.RespondAsync("rewarded: " + chipsRewarded + " Chips").ConfigureAwait(false);
+                            
+                            var embed = new DiscordEmbedBuilder()
+                                .WithTitle("Passed")
+                                .WithColor(new DiscordColor(0, 255, 0))
+                                .WithThumbnail("https://i.pinimg.com/736x/60/4f/0b/604f0b8b93f5c46bfbe5939e39411b13.jpg")
+                                .AddField("User", user.Username)
+                                .AddField("Chips Rewarded", chipsRewarded.ToString());
+                            
+                            await ctx.Channel.SendMessageAsync(embed: embed.Build()).ConfigureAwait(false);
+                            
+                            continue;
                         }
+                        
+                        await ctx.RespondAsync("Continued").ConfigureAwait(false);
+                        contMultiplier <<= 1;
+                        pass = 3;
                     }
                     
                 }
@@ -107,9 +112,31 @@ public class DrinkingGameModule : BaseCommandModule
         }
     }
 
+    private async Task<string> PromptGuess(CommandContext ctx, DiscordUser user, Options options)
+    {
+        var interactivity = ctx.Client.GetInteractivity();
+        var msg = user.Username + ": Smoke or Fire" + (options == Options.Full ? ", Higher or Lower" : "");
+
+        await ctx.RespondAsync(msg).ConfigureAwait(false);
+
+        var guess = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
+
+        return guess.Result.Content;
+    }
+
+    private async Task<bool> Pass(CommandContext ctx, DiscordUser user)
+    {
+        var interactivity = ctx.Client.GetInteractivity();
+        await ctx.RespondAsync("Would you like to (P)ass or (C)ontinue?").ConfigureAwait(false);
+        var answer = await interactivity.WaitForMessageAsync(x => x.Author == user).ConfigureAwait(false);
+        return Regex.IsMatch(answer.Result.Content, "^((p+)|(p+a+s+s+))$", RegexOptions.IgnoreCase);
+    }
+    
+    
+
     private int CheckGuess(string guess, int options)
     {
-        string[] regex = { "^((s)|(s+m+o+k+e+))", "^((f)|(f+i+r+e+))", "^((h)|(h+i+g+h+e+r+))", "^((l)|(l+o+w+e+r+))" };
+        string[] regex = { "^((s+)|(s+m+o+k+e+))$", "^((f+)|(f+i+r+e+))$", "^((h+)|(h+i+g+h+e+r+))$", "^((l+)|(l+o+w+e+r+))$" };
         
         for (int i = 0; i < options; i++)
         {

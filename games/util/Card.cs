@@ -1,4 +1,7 @@
 using System.Runtime.CompilerServices;
+using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 
 namespace DiscordBot.games.util;
 
@@ -6,10 +9,14 @@ public class Card
 {
     public enum Suites
     {
-        Hearts = 0,
-        Diamonds,
-        Clubs,
-        Spades
+        // Hearts = 0,
+        // Diamonds,
+        // Clubs,
+        // Spades
+        H = 0,
+        D,
+        C,
+        S
     }
 
     public int Value { get; set; }
@@ -46,14 +53,16 @@ public class Card
         }
     }
 
-    public string Name
-    {
-        get
-        {
-            return NamedValue + " of  " + Suite.ToString();
-        }
-    }
+    public string Name =>
+        NamedValue + " of  " + Suite;
+
+        public string Emoji =>
+        // NamedValue + " of  " + Suite.ToString();
+        ":" + NamedValue + Suite + ":";
     
+    public DiscordEmoji GetEmoji(CommandContext ctx) { return DiscordEmoji.FromName(ctx.Client, Emoji);}
+    
+
     public int GetSuite() { return (int) Suite; }
 
     public Card(int Value, Suites Suite)
