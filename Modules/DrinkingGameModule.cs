@@ -5,6 +5,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DiscordBot.games;
+using discordBot.util;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules;
@@ -14,7 +15,7 @@ public class DrinkingGameModule : BaseCommandModule
     private enum Options
     {
         Minimum = 2,
-        Full = 4,
+        Full = 5,
     }
 
 
@@ -71,6 +72,11 @@ public class DrinkingGameModule : BaseCommandModule
                         
                         pass = 0;
                         sof.ClearInPlayCards();
+                    }
+                    else if (choice == 4)
+                    {
+                        await ctx.Channel.SendMessageAsync("everybody owes a shot").ConfigureAwait(false);
+                        contMultiplier <<= 4;
                     }
 
                     if (pass >= 4)
@@ -135,7 +141,7 @@ public class DrinkingGameModule : BaseCommandModule
 
     private int CheckGuess(string guess, int options)
     {
-        string[] regex = { "^((s+)|(s+m+o+k+e+))$", "^((f+)|(f+i+r+e+))$", "^((h+)|(h+i+g+h+e+r+))$", "^((l+)|(l+o+w+e+r+))$" };
+        string[] regex = { "^((s+)|(s+m+o+k+e+))$", "^((f+)|(f+i+r+e+))$", "^((h+)|(h+i+g+h+e+r+))$", "^((l+)|(l+o+w+e+r+))$", "^(s+a+m+e+)$" };
         
         for (int i = 0; i < options; i++)
         {
