@@ -16,7 +16,8 @@ public class SmokeOrFire
         Smoke = 0,
         Fire,
         Higher,
-        Lower
+        Lower,
+        SameCard
     }
 
     public SmokeOrFire()
