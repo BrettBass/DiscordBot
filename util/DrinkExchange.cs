@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using DiscordBot;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
 
@@ -6,10 +7,9 @@ namespace discordBot.util;
 
 public sealed class DrinkExchange {
     
-    public static string Name = "Drink Exchange";
-    private static string File = "/home/brett/projects/DiscordBot/storage/DrinkExchange.json";
-    public static Dictionary<ulong, UserData>? UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(System.IO.File.ReadAllText(File));
-
+    public static readonly string Name = "Drink Exchange";
+    public static Dictionary<ulong, UserData>? UserData = JsonConvert.DeserializeObject<Dictionary<ulong, UserData>>(File.ReadAllText(Global.JsonDatabase));
+    public static readonly string Logo = "https://i.ytimg.com/vi/Xn1lpsAN06I/maxresdefault.jpg";
 
     public static bool Withdraw(DiscordUser user, double amount)
     {
@@ -61,9 +61,15 @@ public sealed class DrinkExchange {
         return UserData[user.Id]._barTab;
     }
 
+    public static void TakeDrink(DiscordUser user, double amount)
+    {
+        if(!checkAccount(user)) AddAccount(user);
+        UserData[user.Id].UpdateTab(-amount);
+    }
+
     private static void UpdateJson()
     {
-        System.IO.File.WriteAllText(File, JsonConvert.SerializeObject(UserData));
+        File.WriteAllText(Global.JsonDatabase, JsonConvert.SerializeObject(UserData));
     }
 
     ~DrinkExchange()
