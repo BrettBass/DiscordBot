@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[3.6.1, )"
             },
+            "HSNXT.DSharpPlus.CommandsNext.Extended": {
+              "target": "Package",
+              "version": "[3.0.198, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.1, )"

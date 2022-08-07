@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MBGZJlizj2iP09UoyQSPmt7jyijmOczjwyTIKAfX2dgO6zi20tyl+4JaOwj2z3s9sPU8UUcM5SfIi8+EiX1VDw==",
+  "dgSpecHash": "Q1qv/CAf9QWlR8wUCjfyZVGgI6hujO6591ML8ZuXzXgVEAC2Znt5OSpzLS+MnmsHjVO+78nsnzR5qSM0NizX5g==",
   "success": true,
   "projectFilePath": "/home/brett/projects/DiscordBot/discordBot.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "/home/brett/.nuget/packages/dsharpplus.interactivity/4.2.0/dsharpplus.interactivity.4.2.0.nupkg.sha512",
     "/home/brett/.nuget/packages/dsharpplus.slashcommands/4.2.0/dsharpplus.slashcommands.4.2.0.nupkg.sha512",
     "/home/brett/.nuget/packages/emzi0767.common/2.6.2/emzi0767.common.2.6.2.nupkg.sha512",
+    "/home/brett/.nuget/packages/hsnxt.dsharpplus.commandsnext.extended/3.0.198/hsnxt.dsharpplus.commandsnext.extended.3.0.198.nupkg.sha512",
     "/home/brett/.nuget/packages/microsoft.extensions.configuration/6.0.1/microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "/home/brett/.nuget/packages/microsoft.extensions.configuration.abstractions/6.0.0/microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "/home/brett/.nuget/packages/microsoft.extensions.configuration.binder/6.0.0/microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",
@@ -122,5 +123,16 @@
     "/home/brett/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
     "/home/brett/.nuget/packages/yamldotnet/4.2.1/yamldotnet.4.2.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "HSNXT.DSharpPlus.CommandsNext.Extended 3.0.198 depends on DSharpPlus (>= 4.0.0-nightly-00001) but DSharpPlus 4.0.0-nightly-00001 was not found. An approximate best match of DSharpPlus 4.0.0-rc1 was resolved.",
+      "libraryId": "DSharpPlus",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

@@ -1,13 +1,12 @@
 using Discord.Interactions;
 using discordBot;
+using discordBot.util;
 
 namespace DiscordBot.Modules
 {
     
     public class InteractionModule : InteractionModuleBase<SocketInteractionContext>{
-
-        DrinkExchange bank = new DrinkExchange();
-
+        
         [SlashCommand("ping", "responds with pong")]
         public async Task HandlePingCommand()
         {

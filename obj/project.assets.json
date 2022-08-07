@@ -178,6 +178,19 @@
           "lib/netcoreapp2.1/Emzi0767.Common.dll": {}
         }
       },
+      "HSNXT.DSharpPlus.CommandsNext.Extended/3.0.198": {
+        "type": "package",
+        "dependencies": {
+          "DSharpPlus": "4.0.0-nightly-00001",
+          "Microsoft.Extensions.DependencyInjection": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DSharpPlus.CommandsNext.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DSharpPlus.CommandsNext.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/6.0.1": {
         "type": "package",
         "dependencies": {
@@ -2055,6 +2068,19 @@
         "lib/netcoreapp2.1/Emzi0767.Common.xml",
         "lib/netstandard2.0/Emzi0767.Common.dll",
         "lib/netstandard2.0/Emzi0767.Common.xml"
+      ]
+    },
+    "HSNXT.DSharpPlus.CommandsNext.Extended/3.0.198": {
+      "sha512": "7IlTOqknWQZ0Y0YPz/p9XYRkWXPR6Pd1xf1fI38mKBftpb/4qtSuM+vUFAMOqx4KxrkPC9D2r9I+oWycpilg2A==",
+      "type": "package",
+      "path": "hsnxt.dsharpplus.commandsnext.extended/3.0.198",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hsnxt.dsharpplus.commandsnext.extended.3.0.198.nupkg.sha512",
+        "hsnxt.dsharpplus.commandsnext.extended.nuspec",
+        "lib/netstandard2.0/DSharpPlus.CommandsNext.dll",
+        "lib/netstandard2.0/DSharpPlus.CommandsNext.xml"
       ]
     },
     "Microsoft.Extensions.Configuration/6.0.1": {
@@ -5747,6 +5773,7 @@
       "DSharpPlus.Interactivity >= 4.2.0",
       "DSharpPlus.SlashCommands >= 4.2.0",
       "Discord.Net >= 3.6.1",
+      "HSNXT.DSharpPlus.CommandsNext.Extended >= 3.0.198",
       "Microsoft.Extensions.Configuration >= 6.0.1",
       "Microsoft.Extensions.Configuration.Yaml >= 2.0.0-preview2",
       "Microsoft.Extensions.DependencyInjection >= 6.0.0",
@@ -5806,6 +5833,10 @@
             "target": "Package",
             "version": "[3.6.1, )"
           },
+          "HSNXT.DSharpPlus.CommandsNext.Extended": {
+            "target": "Package",
+            "version": "[3.0.198, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
             "version": "[6.0.1, )"
@@ -5841,5 +5872,17 @@
         "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "HSNXT.DSharpPlus.CommandsNext.Extended 3.0.198 depends on DSharpPlus (>= 4.0.0-nightly-00001) but DSharpPlus 4.0.0-nightly-00001 was not found. An approximate best match of DSharpPlus 4.0.0-rc1 was resolved.",
+      "libraryId": "DSharpPlus",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

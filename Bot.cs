@@ -5,6 +5,7 @@ using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Yaml;
 using DiscordBot.Modules;
+using discordBot.util;
 using DSharpPlus.CommandsNext.Executors;
 using DSharpPlus.Interactivity.Extensions;
 
@@ -12,8 +13,6 @@ namespace DiscordBot;
 
 public class Bot
 {
-    public static string yamlfile = "/home/brett/projects/DiscordBot/storage/config.yml";
-
     public  InteractivityExtension Interactivity { get; private set; }
     public DiscordClient Client { get; private set; }
     public CommandsNextExtension Commands { get; private set; }
@@ -22,7 +21,7 @@ public class Bot
     {
         var configBuilder = new ConfigurationBuilder()
             //.SetBasePath(AppContext.BaseDirectory)
-            .AddYamlFile(yamlfile)
+            .AddYamlFile(Global.ConfigYml)
             .Build();
 
         var config = new DiscordConfiguration()
@@ -43,10 +42,10 @@ public class Bot
         // {
         //     
         // });
-
+    
         var commandsConfig = new CommandsNextConfiguration()
             {
-                StringPrefixes = new String[] { configBuilder["prefix"] },
+                StringPrefixes = new[] { configBuilder["prefix"] },
                 EnableDms = true,
                 EnableMentionPrefix = true,
                 DmHelp = true,
@@ -55,9 +54,11 @@ public class Bot
                 
             };
         Commands = Client.UseCommandsNext(commandsConfig);
+        Commands.RegisterCommands<BankCommandModule>();
         Commands.RegisterCommands<PrefixModule>();
         Commands.RegisterCommands<ResponseModule>();
         Commands.RegisterCommands<DrinkingGameModule>();
+        Commands.SetHelpFormatter<CustomHelpFormatter>();
 
         await Client.ConnectAsync();
         await Task.Delay(-1);

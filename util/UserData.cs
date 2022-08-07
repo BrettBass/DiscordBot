@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace discordBot;
+namespace discordBot.util;
 
 public record UserData
 {
