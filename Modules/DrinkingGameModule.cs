@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
-using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
@@ -20,6 +19,7 @@ public class DrinkingGameModule : BaseCommandModule
 
 
     [Command("smokeorfire"), Aliases("sof")]
+    [Description("sof <users>")]
     public async Task SmokeOrFire(CommandContext ctx, params DiscordUser[] addedUsers)
     {
         var users = new[] {ctx.User}.Concat(addedUsers);
@@ -150,5 +150,10 @@ public class DrinkingGameModule : BaseCommandModule
         }
 
         return -1;
+    }
+
+    public override string ToString()
+    {
+        return "DRINKING GAMES " + base.ToString();
     }
 }

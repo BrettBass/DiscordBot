@@ -12,6 +12,7 @@
           "DSharpPlus.Interactivity": "4.2.0",
           "DSharpPlus.SlashCommands": "4.2.0",
           "Discord.Net": "3.6.1",
+          "HSNXT.DSharpPlus.CommandsNext.Extended": "3.0.198",
           "Microsoft.Extensions.Configuration": "6.0.1",
           "Microsoft.Extensions.Configuration.Yaml": "2.0.0-preview2",
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
@@ -182,6 +183,12 @@
             "assemblyVersion": "2.6.2.0",
             "fileVersion": "2.6.2.0"
           }
+        }
+      },
+      "HSNXT.DSharpPlus.CommandsNext.Extended/3.0.198": {
+        "dependencies": {
+          "DSharpPlus": "4.2.0",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
         }
       },
       "Microsoft.Extensions.Configuration/6.0.1": {
@@ -1294,6 +1301,13 @@
       "sha512": "sha512-/4dew6o2Y8xN0Eu025mDBE/abp/nOVtX59EnZn67ILMqRTk2Mqlnr6oEScSnuLrld8VsIgy+8vURirL6WBpUBA==",
       "path": "emzi0767.common/2.6.2",
       "hashPath": "emzi0767.common.2.6.2.nupkg.sha512"
+    },
+    "HSNXT.DSharpPlus.CommandsNext.Extended/3.0.198": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7IlTOqknWQZ0Y0YPz/p9XYRkWXPR6Pd1xf1fI38mKBftpb/4qtSuM+vUFAMOqx4KxrkPC9D2r9I+oWycpilg2A==",
+      "path": "hsnxt.dsharpplus.commandsnext.extended/3.0.198",
+      "hashPath": "hsnxt.dsharpplus.commandsnext.extended.3.0.198.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/6.0.1": {
       "type": "package",
