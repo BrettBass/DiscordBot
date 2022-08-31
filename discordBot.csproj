@@ -23,4 +23,8 @@
     <Content Include="obj\rider.project.restore.info" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="storage\images" />
+  </ItemGroup>
+
 </Project>

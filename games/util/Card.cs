@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 
@@ -32,6 +30,9 @@ public class Card
             string name = string.Empty;
             switch (Value)
             {
+                case (-1):
+                    name = "Blank";
+                    break;
                 case (1):
                     name = "Ace";
                     break;
@@ -69,5 +70,11 @@ public class Card
     {
         this.Value = Value;
         this.Suite = Suite;
+    }
+
+    public Card()
+    {
+        this.Value = -1;
+        this.Suite = Suites.H;
     }
 }

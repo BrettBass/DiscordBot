@@ -9,7 +9,6 @@ public class SmokeOrFire
     private Deck gameDeck;
     private Deck inPlayCards;
     private Deck removedCards;
-    private static Random rnd = new Random();
     
     private enum Guess
     {
@@ -29,14 +28,14 @@ public class SmokeOrFire
     }
     public bool Color(int guess)
     {
-        var currentCard = gameDeck.DrawCard(rnd.Next(gameDeck.Size()  - 1));
+        var currentCard = gameDeck.DrawRandomCard();
         inPlayCards.Add(currentCard);
         return guess == (int)Guess.Smoke ? (currentCard.GetSuite() > 1) : (currentCard.GetSuite() < 2);
     }
 
     public bool Value(int guess)
     {
-        var currentCard = gameDeck.DrawCard(rnd.Next(gameDeck.Size() - 1));
+        var currentCard = gameDeck.DrawRandomCard();
         var lastCardValue = inPlayCards.Get(inPlayCards.Size() - 1).Value;
         
         inPlayCards.Add(currentCard);

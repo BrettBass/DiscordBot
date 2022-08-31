@@ -3,6 +3,7 @@ namespace DiscordBot.games.util;
 public class Deck
 {
     public List<Card> Cards = new List<Card>();
+    private static Random rnd = new Random();
     public void FillDeck()
     {
         //Can use a single loop utilising the mod operator % and Math.Floor
@@ -39,4 +40,12 @@ public class Deck
     public Card Get(int index) { return Cards[index]; }
     
     public void Flush() { Cards = new List<Card>(); }
+
+    public Card DrawRandomCard()
+    {
+        int position = rnd.Next(Cards.Count);
+        Card removedCard = Cards[position];
+        Cards.RemoveAt(position);
+        return removedCard;
+    }
 }

@@ -1,12 +1,8 @@
-using System.Globalization;
 using System.Text.RegularExpressions;
-using discordBot;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DiscordBot.games;
 using discordBot.util;
-using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules
@@ -17,6 +13,27 @@ namespace DiscordBot.Modules
         public async Task Ping(CommandContext ctx)
         {
             await ctx.Channel.SendMessageAsync("go fuck yourself");
+        }
+
+        [Command("cake")]
+        public async Task Cake(CommandContext ctx)
+        {
+            
+            using (var fs = new FileStream("./storage/images/cake.mp4", FileMode.Open, FileAccess.Read))
+            {
+                var msg = await new DiscordMessageBuilder()
+                    .WithContent("Here is a really dumb file that I am testing with.")
+                    .WithFiles(new Dictionary<string, Stream>() { { "ADumbFile1.txt", fs } })
+                    .SendAsync(ctx.Channel);           
+            }
+            //
+            // var msg = new DiscordMessageBuilder().WithFile(new FileStream("./storage/images/cake.mp4"));
+            //     "https://images-ext-1.discordapp.net/external/P2ZgfWiikaj0o8EzSoYYtBtC5KYk1SjzxRO3Uiy3xNg/https/media.tenor.com/gZsSfgthvnEAAAPo/gay-butt.mp4";
+            //
+            //
+            //
+            // await ctx.Channel.SendMessageAsync(attachment);
+
         }
 
         [Command("tyler")]
