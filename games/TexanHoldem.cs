@@ -4,11 +4,15 @@ namespace DiscordBot.games;
 
 public class TexanHoldem
 {
+    private readonly Deck _deck = new();
+
+    private readonly List<Card> _tableCards = new(5);
+
     public Tuple<Card, Card>[] Deal(int numPlayers)
     {
         var dealtPairs = new Tuple<Card, Card>[numPlayers];
 
-        for (int i = 0; i < numPlayers; i++)
+        for (var i = 0; i < numPlayers; i++)
             dealtPairs[i] = new Tuple<Card, Card>(_deck.DrawRandomCard(), _deck.DrawRandomCard());
 
         return dealtPairs;
@@ -16,9 +20,9 @@ public class TexanHoldem
 
     public List<Card> Flop()
     {
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
             _tableCards[i] = _deck.DrawRandomCard();
-        
+
         return _tableCards.GetRange(0, 3);
     }
 
@@ -33,8 +37,4 @@ public class TexanHoldem
         _tableCards[4] = _deck.DrawRandomCard();
         return _tableCards;
     }
-
-    private Deck _deck = new Deck();
-
-    private List<Card> _tableCards = new List<Card>(5);
 }

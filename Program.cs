@@ -1,12 +1,11 @@
-namespace DiscordBot
+namespace DiscordBot;
+
+public class Program
 {
-    public class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var bot = new Bot();
-            bot.RunAsync().GetAwaiter().GetResult();
-            Console.WriteLine("Bot Ready!");
-        }
+        var bot = new Bot();
+        bot.RunAsync().GetAwaiter().GetResult();
+        Console.WriteLine("Bot Ready!");
     }
 }

@@ -2,23 +2,24 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity.Extensions;
 
-namespace DiscordBot.Modules
+namespace DiscordBot.Modules;
+
+public class ResponseModule : BaseCommandModule
 {
-    public class ResponseModule : BaseCommandModule
+    [Command("echo")]
+    public async Task Echo(CommandContext ctx, params string[] msgs)
     {
-        [Command("echo")]
-        public async Task Echo(CommandContext ctx, params String[] msgs)
+        var interactivity = ctx.Client.GetInteractivity();
+        var msg = string.Join(" ", msgs);
+        if (msg == "")
         {
-            var interactivity = ctx.Client.GetInteractivity();
-            var msg = String.Join(" ", msgs);
-            if (msg == "")
-            {
-                var msgResult = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel).ConfigureAwait(false);
-                msg += msgResult.Result.Content;
-                await msgResult.Result.DeleteAsync().ConfigureAwait(false);
-            }
-            await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
-            await ctx.Message.DeleteAsync().ConfigureAwait(false);
+            var msgResult = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel)
+                .ConfigureAwait(false);
+            msg += msgResult.Result.Content;
+            await msgResult.Result.DeleteAsync().ConfigureAwait(false);
         }
+
+        await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
+        await ctx.Message.DeleteAsync().ConfigureAwait(false);
     }
 }
