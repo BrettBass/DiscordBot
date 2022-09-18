@@ -17,32 +17,44 @@ public class Card
         S
     }
 
+    public Card(int Value, Suites Suite)
+    {
+        this.Value = Value;
+        this.Suite = Suite;
+    }
+
+    public Card()
+    {
+        Value = -1;
+        Suite = Suites.H;
+    }
+
     public int Value { get; set; }
 
     public Suites Suite { get; set; }
-    
+
     //Used to get full name, also useful 
     //if you want to just get the named value
     public string NamedValue
     {
         get
         {
-            string name = string.Empty;
+            var name = string.Empty;
             switch (Value)
             {
-                case (-1):
+                case -1:
                     name = "Blank";
                     break;
-                case (1):
+                case 1:
                     name = "Ace";
                     break;
-                case (13):
+                case 13:
                     name = "King";
                     break;
-                case (12):
+                case 12:
                     name = "Queen";
                     break;
-                case (11):
+                case 11:
                     name = "Jack";
                     break;
                 default:
@@ -57,24 +69,18 @@ public class Card
     public string Name =>
         NamedValue + " of  " + Suite;
 
-        public string Emoji =>
+    public string Emoji =>
         // NamedValue + " of  " + Suite.ToString();
         ":" + NamedValue + Suite + ":";
-    
-    public DiscordEmoji GetEmoji(CommandContext ctx) { return DiscordEmoji.FromName(ctx.Client, Emoji);}
-    
 
-    public int GetSuite() { return (int) Suite; }
-
-    public Card(int Value, Suites Suite)
+    public DiscordEmoji GetEmoji(CommandContext ctx)
     {
-        this.Value = Value;
-        this.Suite = Suite;
+        return DiscordEmoji.FromName(ctx.Client, Emoji);
     }
 
-    public Card()
+
+    public int GetSuite()
     {
-        this.Value = -1;
-        this.Suite = Suites.H;
+        return (int)Suite;
     }
 }

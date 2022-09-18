@@ -30,7 +30,7 @@ public class CustomHelpFormatter : DefaultHelpFormatter
         _embed.Title = "**" + command.Name + "**";
         _embed.WithThumbnail(
             "https://arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/6VTZYSW4PAI6PA6TAHWDXIMC6E.jpg");
-        _embed.AddField("Aliases", String.Join(" ", command.Aliases), true);
+        _embed.AddField("Aliases", string.Join(" ", command.Aliases), true);
         _embed.AddField("Description", command.Description);
 
         return this;
@@ -39,15 +39,15 @@ public class CustomHelpFormatter : DefaultHelpFormatter
     public override BaseHelpFormatter WithSubcommands(IEnumerable<Command> cmds)
     {
         _embed.Title = "**Help**";
-        String commands = "Commands";
-        String output = "";
+        var commands = "Commands";
+        var output = "";
         foreach (var cmd in cmds)
         {
             if (cmd.IsHidden || cmd.Name is "help") continue;
 
             output += "`" + cmd.Name + "`\n";
         }
-    
+
         if (output is not "") _embed.AddField(commands, output);
         return this;
     }
