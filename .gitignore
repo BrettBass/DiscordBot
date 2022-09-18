@@ -2,8 +2,4 @@
 obj
 bin
 .idea
-Models
-Migrations
-Context
 DiscordBotDB.db
-discordBot.csproj
