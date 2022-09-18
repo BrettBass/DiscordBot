@@ -9,5 +9,7 @@ RUN dotnet restore
 # Copy and publish app and libraries
 COPY . .
 
+RUN dotnet build
+
 # Run the project
 ENTRYPOINT [ "dotnet", "run" ]
