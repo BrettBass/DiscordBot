@@ -2,23 +2,25 @@
 
 namespace DiscordBot.Models;
 
-public sealed class User : Entity
+public sealed class BankAccount : Entity
 {
-    public double Tigers { get; set; }
-    public int Tab { get; set; }
-    public double Trust { get; set; }
+    public double Whores { get; set; }
+    public int Guns { get; set; }
+    public int Horses { get; set; }
+    public int Tigers { get; set; }
+    
 
-    public User(ulong id, double tigers = 100, int tab = 0, double trust = -1)
+    public BankAccount(ulong id, double whores = 5, int guns = 0, int horses = 0, int tigers = 0)
     {
-        (Id, Tigers, Tab, Trust) = (id, tigers, tab, trust);
+        (Id, Whores, Guns, Horses, Tigers) = (id, whores, guns, horses, tigers);
     }
    public static void UpdateDbTest()
    {
-       var user = new User(123);
+       var user = new BankAccount(123);
 
         try
         {
-            const string str = "Trust";
+            const string str = "Whores";
             
             // Console.WriteLine(context.Users.Find(user) == null);
             // var u = context.Users.Update(user);
@@ -36,8 +38,8 @@ public sealed class User : Entity
                 // DiscordBotDbModifier.Increment(123, str, 99999);
                 // DiscordBotDbModifier.Set(123, str, "999");
                 // Console.WriteLine($"{str}: {DiscordBotDbModifier.Pull<int>(123, str)}");
-                DiscordBotDbModifier.Increment(6969, str, 3);
-                Console.WriteLine($"{str}: {DiscordBotDbModifier.Pull<int>(123, str)}");
+                DiscordBotDbModifier.Increment("BankAccount", 6969, str, 3);
+                Console.WriteLine($"{str}: {DiscordBotDbModifier.Pull<int>("BankAccount",123, str)}");
             } catch(Exception e) {Console.WriteLine(e.Message);}
 
             // DiscordBotDbModifier.Update(123, "Chips", "99999999999999");
@@ -48,9 +50,9 @@ public sealed class User : Entity
 
     }
 
-   public override string TableEntityString() { return "Users(Id, Chips, Tab, Trust)"; }
-   public override string ToEntityString() { return $"{Id}, {Tigers}, {Tab}, {Trust}"; }
+   public override string TableEntityString() { return "Users(Id, Whores, Guns, Horses, Tigers)"; }
+   public override string ToEntityString() { return $"{Id}, {Whores}, {Guns}, {Horses},{Tigers}"; }
    
-   public override string Table() { return "Users"; }
+   public override string Table() { return "BankAccount"; }
 
 }
