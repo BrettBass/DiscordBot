@@ -10,34 +10,39 @@ public sealed class Bank
     
     public static readonly string BankLogo = Environment.GetEnvironmentVariable("BANKLOGO") ?? "https://i.ytimg.com/vi/Xn1lpsAN06I/maxresdefault.jpg";
 
-    public static readonly string Currency = "Tigers";
+    public static readonly string[] Currencies = {"Whores", "Guns", "Horses", "Tigers"};
 
-    public static bool Withdraw(DiscordUser user, int amount)
+    private const string Table = "BankAccount";
+
+    public static bool Withdraw(DiscordUser user, int amount, String currency)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
         
-        if (DiscordBotDbModifier.Pull<double>(user.Id, Currency) < amount) return false;
+        if (!Array.Exists(Currencies, x => String.Equals(x, currency, StringComparison.CurrentCultureIgnoreCase)) 
+            || DiscordBotDbModifier.Pull<double>(Table, user.Id, currency) < amount) return false;
         
-        DiscordBotDbModifier.Decrement(user.Id, Currency, amount);
+        DiscordBotDbModifier.Decrement(Table, user.Id, currency, amount);
         return true;
     }
 
-    public static int Deposit(DiscordUser user, int amount)
+    public static int Deposit(DiscordUser user, int amount, string currency)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+
+        if (!Array.Exists(Currencies,
+                x => String.Equals(x, currency, StringComparison.CurrentCultureIgnoreCase))) return 0;
         
-        DiscordBotDbModifier.Increment(user.Id, Currency, amount);
+        DiscordBotDbModifier.Increment(Table, user.Id, currency, amount);
 
         return amount;
     }
 
-    public static User GetUserData(DiscordUser user)
+    public static IEnumerable<(string, string?)> BankingInfo(DiscordUser user)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
-        var bal  = DiscordBotDbModifier.Pull<int>(user.Id, Currency);
-        var tab = DiscordBotDbModifier.Pull<int>(user.Id, "Tab");
-        var trust = DiscordBotDbModifier.Pull<int>(user.Id, "Trust");
-        
-        return new User(user.Id, bal, tab, trust);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+
+        // ReSharper disable once HeapView.ObjectAllocation.Evident
+        foreach (var currency in Currencies)
+            yield return (currency, DiscordBotDbModifier.Pull<string>(Table, user.Id, currency));
     }
 }
