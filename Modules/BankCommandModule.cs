@@ -15,32 +15,30 @@ public class BankCommandModule : BaseCommandModule
     {
         //get the id of user who sent the command
         var user = ctx.User;
-        var userdata = Bank.GetUserData(user);
 
         var embed = new DiscordEmbedBuilder()
             .WithTitle(Bank.BankName)
             .WithColor(new DiscordColor(0, 255, 0))
             .WithThumbnail(Bank.BankLogo)
-            .AddField("User", user.Username)
-            .AddField(Bank.Currency, userdata.Tigers.ToString(CultureInfo.InvariantCulture), true)
-            .AddField("Drinks", userdata.Tab.ToString(CultureInfo.InvariantCulture), true)
-            .AddField("Trustworthiness", userdata.Trust.ToString(CultureInfo.CurrentCulture), true);
+            .AddField("User", user.Username);
+        foreach (var (name, value) in Bank.BankingInfo(user))
+            embed.AddField(name, value);
+        
 
         await ctx.Channel.SendMessageAsync(embed.Build());
     }
 
     [Command("deposit")]
-    public async Task Deposit(CommandContext ctx, int amount)
+    public async Task Deposit(CommandContext ctx, int amount, string currency)
     {
-        Bank.Deposit(ctx.User, amount);
-        await ctx.Channel.SendMessageAsync("Deposited " + amount).ConfigureAwait(false);
+        await ctx.Channel.SendMessageAsync("Deposited " + Bank.Deposit(ctx.User, amount, currency)).ConfigureAwait(false);
     }
 
     //case insensitive command withdraw
     [Command("withdraw")]
-    public async Task Withdraw(CommandContext ctx, int amount)
+    public async Task Withdraw(CommandContext ctx, int amount, string currency)
     {
-        if (Bank.Withdraw(ctx.User, amount))
+        if (Bank.Withdraw(ctx.User, amount, currency))
             await ctx.Channel.SendMessageAsync("Withdrew " + amount).ConfigureAwait(false);
         else
             await ctx.Channel.SendMessageAsync("Invalid amount").ConfigureAwait(false);
