@@ -10,23 +10,24 @@ public class Bar
     public static readonly string Logo = Environment.GetEnvironmentVariable("BARLOGO") ??
                                             "https://melmagazine.com/wp-content/uploads/2022/04/Drunken_Monkey_Hypothesis-1024x427.jpg";
 
-    public static string Column = "Tab";
+    public const int ShotToBeerRatio = 8;
+    private const string Table = "Tab";
     
     public static void AddDrinks(DiscordUser user, int amount)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
-        DiscordBotDbModifier.Increment(user.Id, Column, amount);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+        DiscordBotDbModifier.Increment(Table, user.Id, "Drinks", amount);
     }
 
     public static int Tab(DiscordUser user)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
-        return DiscordBotDbModifier.Pull<int>(user.Id, Column);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+        return DiscordBotDbModifier.Pull<int>(Table, user.Id, "Drinks");
     }
 
     public static void TakeDrinks(DiscordUser user, int amount)
     {
-        if (!DiscordBotDbModifier.Exists(user.Id)) DiscordBotDbModifier.AddEntity(user.Id);
-        DiscordBotDbModifier.Decrement(user.Id, Column, amount);
+        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+        DiscordBotDbModifier.Decrement(Table, user.Id, "Drinks", amount);
     }
 }
