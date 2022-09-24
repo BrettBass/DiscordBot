@@ -215,6 +215,12 @@ C:/Users/brett/Code/c#/discordBot/bin/Debug/net6.0/runtimes/win/lib/net6.0/Syste
 /src/obj/Debug/net6.0/discordBot.genruntimeconfig.cache
 /src/obj/Debug/net6.0/ref/discordBot.dll
 /src/bin/Debug/net6.0/storage/DiscordBotDB.db
+/src/bin/Debug/net6.0/DSharpPlus.VoiceNext.dll
+/src/bin/Debug/net6.0/runtimes/win-x64/native/libopus.dll
+/src/bin/Debug/net6.0/runtimes/win-x64/native/libsodium.dll
+/src/bin/Debug/net6.0/runtimes/win-x86/native/libopus.dll
+/src/bin/Debug/net6.0/runtimes/win-x86/native/libsodium.dll
+/src/bin/Debug/net6.0/DSharpPlus.Lavalink.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\storage\DiscordBotDB.db
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\discordBot.exe
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\discordBot.deps.json
@@ -233,7 +239,9 @@ C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DotNetEnv.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.CommandsNext.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.Interactivity.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.Lavalink.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.SlashCommands.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\DSharpPlus.VoiceNext.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\Emzi0767.Common.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\Humanizer.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\Microsoft.Data.Sqlite.dll
@@ -282,6 +290,10 @@ C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\System.Interactive.Asyn
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\System.Linq.Async.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\System.Reactive.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\YamlDotNet.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\win-x64\native\libopus.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\win-x64\native\libsodium.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\win-x86\native\libopus.dll
+C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\win-x86\native\libsodium.dll
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\alpine-x64\native\libe_sqlite3.so
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\linux-arm\native\libe_sqlite3.so
 C:\Users\brett\RiderProjects\DiscordBot\bin\Debug\net6.0\runtimes\linux-arm64\native\libe_sqlite3.so

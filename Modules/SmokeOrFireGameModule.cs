@@ -9,7 +9,7 @@ using DSharpPlus.Interactivity.Extensions;
 
 namespace DiscordBot.Modules;
 
-public sealed class DrinkingGameModule : BaseCommandModule
+public sealed class SmokeOrFireGameModule : BaseCommandModule
 {
     [Command("smokeorfire")]
     [Aliases("sof")]
@@ -55,13 +55,7 @@ public sealed class DrinkingGameModule : BaseCommandModule
                     {
                         var drinksOwed = sof.GetCardsInPlay();
                         Bar.AddDrinks(user, drinksOwed);
-                        var embed = new DiscordEmbedBuilder()
-                            .WithTitle("Loser")
-                            .WithColor(new DiscordColor(0, 255, 0))
-                            .WithThumbnail(
-                                "https://pm1.narvii.com/6450/2f24804e66bd3d4449a2619f2d422ade180ce78c_hq.jpg")
-                            .AddField("User", user.Username)
-                            .AddField("Tab", Bar.Tab(user).ToString(CultureInfo.InvariantCulture));
+                        var embed = GameEmbed(user.Username, drinksOwed.ToString(), false);
 
                         await ctx.Channel.SendMessageAsync(embed.Build()).ConfigureAwait(false);
 
@@ -71,33 +65,26 @@ public sealed class DrinkingGameModule : BaseCommandModule
                     else if (choice == 4)
                     {
                         await ctx.Channel.SendMessageAsync("everybody owes a shot").ConfigureAwait(false);
+                        Bank.Deposit(user, 1, Bank.Currencies[2]);
                         contMultiplier <<= 4;
                     }
 
-                    if (pass >= 4)
+                    if (pass < 4) continue;
+                    
+                    if (Pass(ctx, user).Result)
                     {
-                        if (Pass(ctx, user).Result)
-                        {
-                            var chipsRewarded = sof.GetCardsInPlay() * contMultiplier;
-                            Bank.Deposit(user, chipsRewarded);
+                        var whoresRewarded = sof.GetCardsInPlay() * contMultiplier;
+                        Bank.Deposit(user, whoresRewarded, Bank.Currencies[0]);
+                        var embed = GameEmbed(user.Username, whoresRewarded.ToString(), true);
 
-                            var embed = new DiscordEmbedBuilder()
-                                .WithTitle("Passed")
-                                .WithColor(new DiscordColor(0, 255, 0))
-                                .WithThumbnail(
-                                    "https://i.pinimg.com/736x/60/4f/0b/604f0b8b93f5c46bfbe5939e39411b13.jpg")
-                                .AddField("User", user.Username)
-                                .AddField("Chips Rewarded", chipsRewarded.ToString());
+                        await ctx.Channel.SendMessageAsync(embed.Build()).ConfigureAwait(false);
 
-                            await ctx.Channel.SendMessageAsync(embed.Build()).ConfigureAwait(false);
-
-                            continue;
-                        }
-
-                        await ctx.RespondAsync("Continued").ConfigureAwait(false);
-                        contMultiplier *= 5/3;
-                        pass = 3;
+                        continue;
                     }
+
+                    await ctx.RespondAsync("Continued").ConfigureAwait(false);
+                    contMultiplier *= 4/3;
+                    pass = 3;
                 }
 
                 pass = 1;
@@ -107,16 +94,15 @@ public sealed class DrinkingGameModule : BaseCommandModule
             await ctx.RespondAsync("If anyone wants to (Q)uit:").ConfigureAwait(false);
             var quit = await interactivity
                 .WaitForMessageAsync(x => x.Channel == ctx.Channel && users.Contains(x.Author)).ConfigureAwait(false);
-            if (Quit(quit.Result.Content))
-            {
-                await ctx.RespondAsync("Game Over").ConfigureAwait(false);
-                return;
-            }
+            
+            if (!Quit(quit.Result.Content)) continue;
+            await ctx.RespondAsync("Game Over").ConfigureAwait(false);
+            return;
         }
     }
 
     // Present users with guess options
-    private async Task<string> PromptGuess(CommandContext ctx, DiscordUser user, Options options)
+    private static async Task<string> PromptGuess(CommandContext ctx, DiscordUser user, Options options)
     {
         var interactivity = ctx.Client.GetInteractivity();
         var msg = user.Username + ": Smoke or Fire" + (options == Options.Full ? ", Higher or Lower" : "");
@@ -128,7 +114,7 @@ public sealed class DrinkingGameModule : BaseCommandModule
         return guess.Result.Content;
     }
 
-    private async Task<bool> Pass(CommandContext ctx, DiscordUser user)
+    private static async Task<bool> Pass(CommandContext ctx, DiscordUser user)
     {
         var interactivity = ctx.Client.GetInteractivity();
         await ctx.RespondAsync("Would you like to (P)ass or (C)ontinue?").ConfigureAwait(false);
@@ -136,13 +122,13 @@ public sealed class DrinkingGameModule : BaseCommandModule
         return Regex.IsMatch(answer.Result.Content, "^((p+)|(p+a+s+s+))$", RegexOptions.IgnoreCase);
     }
 
-    private bool Quit(String str)
+    private static bool Quit(string str)
     {
         return Regex.IsMatch(str, "^((q+)|(q+u+i+t+))$", RegexOptions.IgnoreCase);
     }
 
 
-    private int CheckGuess(string guess, int options)
+    private static int CheckGuess(string guess, int options)
     {
         string[] regex =
         {
@@ -155,6 +141,27 @@ public sealed class DrinkingGameModule : BaseCommandModule
                 return i;
 
         return -1;
+    }
+
+    private static DiscordEmbedBuilder GameEmbed(string username, string amount, bool pass)
+    {
+        
+        if(pass)    
+            return new DiscordEmbedBuilder()
+                .WithTitle("Passed")
+                .WithColor(new DiscordColor(0, 255, 0))
+                .WithThumbnail(
+                    "https://i.pinimg.com/736x/60/4f/0b/604f0b8b93f5c46bfbe5939e39411b13.jpg")
+                .AddField("User", username)
+                .AddField("Whores Rewarded", amount);
+        
+        return new DiscordEmbedBuilder()
+            .WithTitle("Loser")
+            .WithColor(new DiscordColor(0, 255, 0))
+            .WithThumbnail(
+                "https://pm1.narvii.com/6450/2f24804e66bd3d4449a2619f2d422ade180ce78c_hq.jpg")
+            .AddField("User", username)
+            .AddField("Drinks Owed", amount);
     }
 
     public override string ToString()

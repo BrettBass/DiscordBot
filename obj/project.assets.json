@@ -216,6 +216,22 @@
           }
         }
       },
+      "DSharpPlus.Lavalink/4.2.0": {
+        "type": "package",
+        "dependencies": {
+          "DSharpPlus": "4.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DSharpPlus.Lavalink.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DSharpPlus.Lavalink.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "DSharpPlus.SlashCommands/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -230,6 +246,45 @@
         "runtime": {
           "lib/netstandard2.0/DSharpPlus.SlashCommands.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "DSharpPlus.VoiceNext/4.2.0": {
+        "type": "package",
+        "dependencies": {
+          "DSharpPlus": "4.2.0",
+          "DSharpPlus.VoiceNext.Natives": "1.0.0",
+          "System.Threading.Channels": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DSharpPlus.VoiceNext.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DSharpPlus.VoiceNext.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "DSharpPlus.VoiceNext.Natives/1.0.0": {
+        "type": "package",
+        "runtimeTargets": {
+          "runtimes/win-x64/native/libopus.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/libsodium.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libopus.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/libsodium.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
           }
         }
       },
@@ -3135,6 +3190,20 @@
         "lib/netstandard2.0/DSharpPlus.Interactivity.xml"
       ]
     },
+    "DSharpPlus.Lavalink/4.2.0": {
+      "sha512": "DJKCSWjMw3ulOOQuIt5T3aFVlCLY20H6QxUQz8Q5nMUf2p01A9PnsuvTn1bJGdxq92OVaVaExeWNhDPyvo9g7g==",
+      "type": "package",
+      "path": "dsharpplus.lavalink/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dsharpplus.lavalink.4.2.0.nupkg.sha512",
+        "dsharpplus.lavalink.nuspec",
+        "dsharpplus.png",
+        "lib/netstandard2.0/DSharpPlus.Lavalink.dll",
+        "lib/netstandard2.0/DSharpPlus.Lavalink.xml"
+      ]
+    },
     "DSharpPlus.SlashCommands/4.2.0": {
       "sha512": "u9eUYmrvriCHu+pRIJPq9/6fJHB+SkbN3YXkjhpKpS+ddDF/8BQQ5H4zuTIA/gWr3H41RFVa2Nuz7rbaRKqI5w==",
       "type": "package",
@@ -3147,6 +3216,35 @@
         "dsharpplus.slashcommands.nuspec",
         "lib/netstandard2.0/DSharpPlus.SlashCommands.dll",
         "lib/netstandard2.0/DSharpPlus.SlashCommands.xml"
+      ]
+    },
+    "DSharpPlus.VoiceNext/4.2.0": {
+      "sha512": "nTc+u++d4+qU8kxYfjPZj+05oVDeqzrtYTGiH8qY1ssQPTi1M2yNPzK8+H1yxKKvcCnvlboxTN5Z8etc6ycLaQ==",
+      "type": "package",
+      "path": "dsharpplus.voicenext/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dsharpplus.png",
+        "dsharpplus.voicenext.4.2.0.nupkg.sha512",
+        "dsharpplus.voicenext.nuspec",
+        "lib/netstandard2.0/DSharpPlus.VoiceNext.dll",
+        "lib/netstandard2.0/DSharpPlus.VoiceNext.xml"
+      ]
+    },
+    "DSharpPlus.VoiceNext.Natives/1.0.0": {
+      "sha512": "U+UtMpommsfh+OOgLYQBy1e+53P/q6/LW18bgIJqsyshhThhiyEH8ISnpESdQrcqEDj6Nud7+FbnNi7N4QtDGw==",
+      "type": "package",
+      "path": "dsharpplus.voicenext.natives/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dsharpplus.voicenext.natives.1.0.0.nupkg.sha512",
+        "dsharpplus.voicenext.natives.nuspec",
+        "runtimes/win-x64/native/libopus.dll",
+        "runtimes/win-x64/native/libsodium.dll",
+        "runtimes/win-x86/native/libopus.dll",
+        "runtimes/win-x86/native/libsodium.dll"
       ]
     },
     "Emzi0767.Common/2.6.2": {
@@ -8117,7 +8215,9 @@
     "net6.0": [
       "DSharpPlus.CommandsNext >= 4.2.0",
       "DSharpPlus.Interactivity >= 4.2.0",
+      "DSharpPlus.Lavalink >= 4.2.0",
       "DSharpPlus.SlashCommands >= 4.2.0",
+      "DSharpPlus.VoiceNext >= 4.2.0",
       "Dapper >= 2.0.123",
       "Discord.Net >= 3.6.1",
       "DotNetEnv >= 2.3.0",
@@ -8134,19 +8234,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\brett\\.nuget\\packages\\": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\brett\\RiderProjects\\DiscordBot\\discordBot.csproj",
+      "projectUniqueName": "/src/discordBot.csproj",
       "projectName": "discordBot",
-      "projectPath": "C:\\Users\\brett\\RiderProjects\\DiscordBot\\discordBot.csproj",
-      "packagesPath": "C:\\Users\\brett\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\brett\\RiderProjects\\DiscordBot\\obj\\",
+      "projectPath": "/src/discordBot.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/src/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\brett\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -8178,7 +8278,15 @@
             "target": "Package",
             "version": "[4.2.0, )"
           },
+          "DSharpPlus.Lavalink": {
+            "target": "Package",
+            "version": "[4.2.0, )"
+          },
           "DSharpPlus.SlashCommands": {
+            "target": "Package",
+            "version": "[4.2.0, )"
+          },
+          "DSharpPlus.VoiceNext": {
             "target": "Package",
             "version": "[4.2.0, )"
           },
@@ -8255,7 +8363,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
       }
     }
   },

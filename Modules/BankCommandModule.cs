@@ -1,4 +1,5 @@
 using System.Globalization;
+using DiscordBot.Models;
 using discordBot.util;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
@@ -21,8 +22,9 @@ public class BankCommandModule : BaseCommandModule
             .WithColor(new DiscordColor(0, 255, 0))
             .WithThumbnail(Bank.BankLogo)
             .AddField("User", user.Username);
-        foreach (var (name, value) in Bank.BankingInfo(user))
-            embed.AddField(name, value);
+        Bank.BankingInfo(ctx.User)?.AddCurrencyFields(ref embed);
+        // foreach (var (name, value) in Bank.BankingInfo(user))
+        //     embed.AddField(name, value);
         
 
         await ctx.Channel.SendMessageAsync(embed.Build());
@@ -31,7 +33,8 @@ public class BankCommandModule : BaseCommandModule
     [Command("deposit")]
     public async Task Deposit(CommandContext ctx, int amount, string currency)
     {
-        await ctx.Channel.SendMessageAsync("Deposited " + Bank.Deposit(ctx.User, amount, currency)).ConfigureAwait(false);
+        Console.WriteLine("deposit");
+        await ctx.Channel.SendMessageAsync($"Deposited {Bank.Deposit(ctx.User, amount, currency)} {currency}").ConfigureAwait(false);
     }
 
     //case insensitive command withdraw

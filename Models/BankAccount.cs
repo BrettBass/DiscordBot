@@ -1,4 +1,6 @@
-﻿using discordBot.util;
+﻿using System.Globalization;
+using discordBot.util;
+using DSharpPlus.Entities;
 
 namespace DiscordBot.Models;
 
@@ -54,5 +56,14 @@ public sealed class BankAccount : Entity
    public override string ToEntityString() { return $"{Id}, {Whores}, {Guns}, {Horses},{Tigers}"; }
    
    public override string Table() { return "BankAccount"; }
+
+   public void AddCurrencyFields(ref DiscordEmbedBuilder embed)
+   {
+       embed.AddField("Whores", Whores.ToString(CultureInfo.InvariantCulture), true)
+           .AddField("Guns", Guns.ToString(CultureInfo.InvariantCulture), true)
+           .AddField("Horses", Horses.ToString(CultureInfo.InvariantCulture), true)
+           .AddField("Tigers", Tigers.ToString(CultureInfo.InvariantCulture));
+
+   }
 
 }

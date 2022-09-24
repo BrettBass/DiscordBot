@@ -2,11 +2,17 @@ using DiscordBot.games.util;
 
 namespace DiscordBot.games;
 
-public class TexanHoldem
+public class TexasHoldem
 {
     private readonly Deck _deck = new();
 
     private readonly List<Card> _tableCards = new(5);
+    
+    public TexasHoldem()
+    {
+        _deck = new Deck();
+        _deck.FillDeck();
+    }
 
     public Tuple<Card, Card>[] Deal(int numPlayers)
     {

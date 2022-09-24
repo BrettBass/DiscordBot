@@ -5,13 +5,13 @@ namespace discordBot.util;
 
 
 
-public class Bar
+public static class Bar
 {
     public static readonly string Logo = Environment.GetEnvironmentVariable("BARLOGO") ??
                                             "https://melmagazine.com/wp-content/uploads/2022/04/Drunken_Monkey_Hypothesis-1024x427.jpg";
 
     public const int ShotToBeerRatio = 8;
-    private const string Table = "Tab";
+    private const string Table = "Tabs";
     
     public static void AddDrinks(DiscordUser user, int amount)
     {

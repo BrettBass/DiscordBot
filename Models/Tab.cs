@@ -2,8 +2,8 @@
 
 public sealed class Tab : Entity
 {
-    public double Drinks { get; set; }
-    public double Shots { get; set; }
+    public int Drinks { get; set; }
+    public int Shots { get; set; }
 
     public Tab(ulong id, int drinks = 0, int shots = 0)
     {

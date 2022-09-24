@@ -1,3 +1,4 @@
+using DiscordBot.Context;
 using DiscordBot.Models;
 using DSharpPlus.Entities;
 
@@ -12,7 +13,7 @@ public sealed class Bank
 
     public static readonly string[] Currencies = {"Whores", "Guns", "Horses", "Tigers"};
 
-    private const string Table = "BankAccount";
+    private const string Table = "BankAccounts";
 
     public static bool Withdraw(DiscordUser user, int amount, String currency)
     {
@@ -37,12 +38,22 @@ public sealed class Bank
         return amount;
     }
 
-    public static IEnumerable<(string, string?)> BankingInfo(DiscordUser user)
+    public static BankAccount BankingInfo(DiscordUser user)
     {
-        if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
+        // if (!DiscordBotDbModifier.Exists(Table, user.Id)) DiscordBotDbModifier.AddEntity(Table, user.Id);
 
-        // ReSharper disable once HeapView.ObjectAllocation.Evident
-        foreach (var currency in Currencies)
-            yield return (currency, DiscordBotDbModifier.Pull<string>(Table, user.Id, currency));
+        using SqliteContext lite = new SqliteContext();
+        var acc = lite.BankAccounts.FirstOrDefault(account => account!.Id == user.Id);
+        if (acc != null) return acc;
+        
+        acc = new BankAccount(user.Id);
+        lite.BankAccounts.Add(acc);
+        lite.SaveChanges();
+        return acc;
+    }
+
+    private static void AddAccount(ref BankAccount acc)
+    {
+        
     }
 }

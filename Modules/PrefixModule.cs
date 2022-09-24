@@ -17,7 +17,7 @@ public class PrefixModule : BaseCommandModule
     public async Task DbAdd(CommandContext ctx)
     {
         await ctx.Channel.SendMessageAsync("adding");
-        User.UpdateDbTest();
+        BankAccount.UpdateDbTest();
     }
 
     [Command("ping")]
@@ -57,41 +57,41 @@ public class PrefixModule : BaseCommandModule
         await ctx.Channel.SendMessageAsync("josh loves brett ass").ConfigureAwait(false);
     }
 
-    [Command("coinflip")]
-    [Description("coinflip <heads/tails>")]
-    [Aliases("cf")]
-    // if no numFlips then default to 1
-    public async Task CoinFlip(CommandContext ctx, int bet = 1)
-    {
-        var interactivity = ctx.Client.GetInteractivity();
-        await ctx.Channel.SendMessageAsync(ctx.User.Username + " heads or tails: ");
-        var response = await interactivity.WaitForMessageAsync(x => x.Author == ctx.User).ConfigureAwait(false);
-        var guess = response.Result.Content;
-
-        guess = guess.ToLower();
-        if (!Regex.IsMatch(response.Result.Content, "(h+e+a+d+|t+a+i+l+)s*", RegexOptions.IgnoreCase))
-        {
-            await ctx.Channel.SendMessageAsync("invalid guess").ConfigureAwait(false);
-            return;
-        }
-
-        var result = BasicDrinking.CoinFlip() ? "heads" : "tails";
-        var msg = result + "\n";
-        if (result != guess.ToLower())
-        {
-            msg += "drink " + bet + " bitch";
-            Bar.AddDrinks(ctx.User, bet);
-        }
-        else
-        {
-            msg += "clean";
-            Bank.Deposit(ctx.User, bet * 10);
-        }
-
-        msg += result + result == guess.ToLower() ? "drink " + bet + " bitch" : "";
-
-        await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
-    }
+    // [Command("coinflip")]
+    // [Description("coinflip <heads/tails>")]
+    // [Aliases("cf")]
+    // // if no numFlips then default to 1
+    // public async Task CoinFlip(CommandContext ctx, int bet = 1)
+    // {
+    //     var interactivity = ctx.Client.GetInteractivity();
+    //     await ctx.Channel.SendMessageAsync(ctx.User.Username + " heads or tails: ");
+    //     var response = await interactivity.WaitForMessageAsync(x => x.Author == ctx.User).ConfigureAwait(false);
+    //     var guess = response.Result.Content;
+    //
+    //     guess = guess.ToLower();
+    //     if (!Regex.IsMatch(response.Result.Content, "(h+e+a+d+|t+a+i+l+)s*", RegexOptions.IgnoreCase))
+    //     {
+    //         await ctx.Channel.SendMessageAsync("invalid guess").ConfigureAwait(false);
+    //         return;
+    //     }
+    //
+    //     var result = BasicDrinking.CoinFlip() ? "heads" : "tails";
+    //     var msg = result + "\n";
+    //     if (result != guess.ToLower())
+    //     {
+    //         msg += "drink " + bet + " bitch";
+    //         Bar.AddDrinks(ctx.User, bet);
+    //     }
+    //     else
+    //     {
+    //         msg += "clean";
+    //         Bank.Deposit(ctx.User, bet * 10);
+    //     }
+    //
+    //     msg += result + result == guess.ToLower() ? "drink " + bet + " bitch" : "";
+    //
+    //     await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
+    // }
     //
     // [Command("coinflip"), Aliases("cf")]
     // [Description("coinflip <bet amount> <players>")]

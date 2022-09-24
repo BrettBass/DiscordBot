@@ -20,13 +20,13 @@ public class DiscordBotDbModifier
         } catch(Exception e) { Console.WriteLine(e.Message);}
     }
 
-    public static T? Pull<T>(ulong id, string column)
+    public static T? Pull<T>(string table, ulong id, string column)
     {
         T? res = default;
         try
         {
             Con.Open();
-            string sql = @$"SELECT {column} FROM Users WHERE Id=@Id";
+            string sql = @$"SELECT {column} FROM {table} WHERE Id=@Id";
             using SQLiteCommand cmd = new (sql, Con);
             cmd.Parameters.Add(new ("@Id", id.ToString()));
             
@@ -52,22 +52,22 @@ public class DiscordBotDbModifier
         return res;
     }
     
-    public static void Set(ulong id, string column, string value)
+    public static void Set(string table, ulong id, string column, string value)
     {
-        string sql = $@"UPDATE Users set {column}=@Value WHERE Id=@Id;";
+        string sql = $@"UPDATE {table} set {column}=@Value WHERE Id=@Id;";
         UpdateCell(sql, id, value);
     }
 
-    public static void Increment(ulong id, string column, int value)
+    public static void Increment(string table, ulong id, string column, int value)
     {
-        if (!Exists(id)) AddEntity(id);
-        string sql = $@"UPDATE Users set {column}={column}+@Value WHERE Id=@Id;";
+        if (!Exists(table, id)) AddEntity(table, id);
+        string sql = $@"UPDATE {table} set {column}={column}+@Value WHERE Id=@Id;";
         UpdateCell(sql, id, value.ToString());
     }
     
-    public static void Decrement(ulong id, string column, int value)
+    public static void Decrement(string table, ulong id, string column, int value)
     {
-        string sql = $@"UPDATE Users set {column}={column}-@Value WHERE Id=@Id;";
+        string sql = $@"UPDATE {table} set {column}={column}-@Value WHERE Id=@Id;";
         UpdateCell(sql, id, value.ToString());
     }
     
@@ -88,13 +88,13 @@ public class DiscordBotDbModifier
         Con.Close();
     }
 
-    public static bool Exists(ulong id)
+    public static bool Exists(string table, ulong id)
     {
         var res = false;
         try
         {
             using var cmd = new SQLiteCommand(Con);
-            cmd.CommandText = $"SELECT * FROM Users WHERE Id={id}";
+            cmd.CommandText = $"SELECT * FROM {table} WHERE Id={id}";
             Con.Open();
             res = cmd.ExecuteScalar() != null;
             Con.Close();
@@ -103,9 +103,9 @@ public class DiscordBotDbModifier
         return res;
     }
 
-    public static void AddEntity(ulong id)
+    public static void AddEntity(string table, ulong id)
     {
-        string sql = $"INSERT INTO Users (Id) VALUES ({id});";
+        string sql = $"INSERT INTO {table} (Id) VALUES ({id});";
         ExecSqlCmd(new SQLiteCommand(sql, Con).ExecuteNonQuery);
     }
 

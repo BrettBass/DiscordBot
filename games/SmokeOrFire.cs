@@ -6,31 +6,31 @@ namespace DiscordBot.games;
 
 public class SmokeOrFire
 {
-    private readonly Deck gameDeck;
-    private readonly Deck inPlayCards;
-    private readonly Deck removedCards;
+    private readonly Deck _gameDeck;
+    private readonly Deck _inPlayCards;
+    private readonly Deck _removedCards;
 
     public SmokeOrFire()
     {
-        gameDeck = new Deck();
-        gameDeck.FillDeck();
-        inPlayCards = new Deck();
-        removedCards = new Deck();
+        _gameDeck = new Deck();
+        _gameDeck.FillDeck();
+        _inPlayCards = new Deck();
+        _removedCards = new Deck();
     }
 
     public bool Color(int guess)
     {
-        var currentCard = gameDeck.DrawRandomCard();
-        inPlayCards.Add(currentCard);
+        var currentCard = _gameDeck.DrawRandomCard();
+        _inPlayCards.Add(currentCard);
         return guess == (int)Guess.Smoke ? currentCard.GetSuite() > 1 : currentCard.GetSuite() < 2;
     }
 
     public bool Value(int guess)
     {
-        var currentCard = gameDeck.DrawRandomCard();
-        var lastCardValue = inPlayCards.Get(inPlayCards.Size() - 1).Value;
+        var currentCard = _gameDeck.DrawRandomCard();
+        var lastCardValue = _inPlayCards.Get(_inPlayCards.Size() - 1).Value;
 
-        inPlayCards.Add(currentCard);
+        _inPlayCards.Add(currentCard);
 
         if (guess == (int)Guess.Higher) return currentCard.Value > lastCardValue;
         if (guess == (int)Guess.Lower) return currentCard.Value < lastCardValue;
@@ -39,19 +39,19 @@ public class SmokeOrFire
 
     public int GetCardsInPlay()
     {
-        return inPlayCards.Size();
+        return _inPlayCards.Size();
     }
 
     public void ClearInPlayCards()
     {
-        removedCards.Add(inPlayCards);
-        inPlayCards.Flush();
+        _removedCards.Add(_inPlayCards);
+        _inPlayCards.Flush();
     }
 
     public void CardsToEmojis(CommandContext ctx, ref DiscordMessageBuilder msg)
     {
-        for (var i = 0; i < inPlayCards.Size(); i++)
-            msg.Content += inPlayCards.Get(i).GetEmoji(ctx);
+        for (var i = 0; i < _inPlayCards.Size(); i++)
+            msg.Content += _inPlayCards.Get(i).GetEmoji(ctx);
     }
 
     private enum Guess
