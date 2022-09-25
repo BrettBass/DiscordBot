@@ -78,29 +78,33 @@ public class MusicModule : BaseCommandModule
         // }
 
         [Command("leave"), Description("Leaves a voice channel.")]
-        public async Task Leave(CommandContext ctx)
+        public async Task Leave(CommandContext ctx, DiscordChannel channel)
         {
-            // check whether VNext is enabled
-            var vnext = ctx.Client.GetVoiceNext();
-            if (vnext == null)
+            var lava = ctx.Client.GetLavalink();
+            if (!lava.ConnectedNodes.Any())
             {
-                // not enabled
-                await ctx.RespondAsync("VNext is not enabled or configured.");
+                await ctx.RespondAsync("The Lavalink connection is not established");
                 return;
             }
 
-            // check whether we are connected
-            var vnc = vnext.GetConnection(ctx.Guild);
-            if (vnc == null)
+            var node = lava.ConnectedNodes.Values.First();
+
+            if (channel.Type != ChannelType.Voice)
             {
-                // not connected
-                await ctx.RespondAsync("Not connected in this guild.");
+                await ctx.RespondAsync("Not a valid voice channel.");
                 return;
             }
 
-            // disconnect
-            vnc.Disconnect();
-            await ctx.RespondAsync("Disconnected");
+            var conn = node.GetGuildConnection(channel.Guild);
+
+            if (conn == null)
+            {
+                await ctx.RespondAsync("Lavalink is not connected.");
+                return;
+            }
+
+            await conn.DisconnectAsync();
+            await ctx.RespondAsync($"Left {channel.Name}!");
         }
 
         [Command("play"), Description("Joins a voice channel.")]
